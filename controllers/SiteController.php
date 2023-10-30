@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\enums\Cities;
 
 class SiteController extends Controller
 {
@@ -124,5 +125,16 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionRegistration()
+    {
+        $model = new \app\models\UserTinder(); // Создайте экземпляр модели UserTinder
+        $cities = \app\models\enums\Cities::listData(); // Получите данные для выпадающего списка с городами
+
+        return $this->render('registration', [
+            'model' => $model, // Передайте модель в представление
+            'cities' => $cities, // Передайте города в представление
+        ]);
     }
 }
