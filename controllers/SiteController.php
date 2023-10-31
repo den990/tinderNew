@@ -129,12 +129,12 @@ class SiteController extends Controller
 
     public function actionRegistration()
     {
-        $model = new \app\models\UserTinder(); // Создайте экземпляр модели UserTinder
-        $cities = array_keys(\app\models\enums\Cities::$list); // Получите данные для выпадающего списка с городами
+        $model = new \app\models\UserTinder();
+        $cities = array_keys(\app\models\enums\Cities::$list);
 
         return $this->render('registration', [
-            'model' => $model, // Передайте модель в представление
-            'cities' => $cities, // Передайте города в представление
+            'model' => $model,
+            'cities' => $cities,
         ]);
     }
 }
