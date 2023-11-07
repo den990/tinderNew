@@ -21,8 +21,6 @@ class RegistrationController extends Controller
             $model->load($postData);
 
             if ($model->validate()) {
-                // Валидация прошла успешно
-                // Сохранение пользователя
                 $password = $model->password_hash;
                 $model->setPassword($password);
                 $locationString = $model->location;
@@ -45,7 +43,7 @@ class RegistrationController extends Controller
             }
         }
 
-        return $this->render('register', [
+        return $this->render('registration', [
             'model' => $model,
             'cities' => Cities::listData(),
         ]);

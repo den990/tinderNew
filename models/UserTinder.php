@@ -59,6 +59,7 @@ class UserTinder extends ActiveRecord implements IdentityInterface
         return $this->getPrimaryKey();
     }
 
+
     public static function findIdentityByAccessToken($token, $type = null)
     {
         // TODO: Implement findIdentityByAccessToken() method.

@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\enums\Cities;
+use app\models\UserTinder;
 
 class SiteController extends Controller
 {
@@ -66,28 +67,6 @@ class SiteController extends Controller
     }
 
     /**
-     * Login action.
-     *
-     * @return Response|string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Logout action.
      *
      * @return Response
@@ -129,12 +108,23 @@ class SiteController extends Controller
 
     public function actionRegistration()
     {
-        $model = new \app\models\UserTinder();
+        $model = new UserTinder();
         $cities = array_keys(\app\models\enums\Cities::$list);
 
         return $this->render('registration', [
             'model' => $model,
             'cities' => $cities,
         ]);
+    }
+    /**
+     * Login action.
+     *
+     * @return Response|string
+     */
+
+    public function actionLogin()
+    {
+        $model = new UserTinder();
+        return $this->render('login',[ 'model' => $model]);
     }
 }

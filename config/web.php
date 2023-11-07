@@ -20,7 +20,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
-            'identityClass' => 'app\models\User',
+            'identityClass' => 'app\models\UserTinder',
             'enableAutoLogin' => true,
         ],
         'errorHandler' => [
@@ -46,7 +46,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'registration' => 'site/registration'
+                'index' => 'site/index',
+                'registration' => 'site/registration',
+                'login' => 'site/login'
             ],
         ],
 

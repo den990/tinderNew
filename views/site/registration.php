@@ -28,7 +28,6 @@ $this->registerJs("
     <div class="register-form">
         <span class="register-form__title">Найдите свою вторую половинку</span>
         <?php $form = ActiveForm::begin(['action' => ['registration/register']]); ?>
-        <!-- Добавьте CSRF-токен в форму -->
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
 
         <div class="register-form__elements__block-with-photo">

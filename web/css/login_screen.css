@@ -130,29 +130,81 @@ html {
   [hidden] {
     display: none;
   }
-.header
+header 
 {
-    display: flex;
     padding-top: 50px;
-    justify-content: space-between;
 }
 
 a {
     text-decoration: none;
 }
 
-section
+.login-block
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 261px;
+}
+
+.login-form
+{
+    background-color: #222222;
+    width: 533px;
+    height: 364px;
+    border-radius: 43px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form__title
+{
+    font: 600 23px/1.22 "Montserrat";
+    padding-bottom: 30px;
+    color:white;
+}
+
+.login-form__elements
 {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-top: 180px;
+}
+
+.login-form__elements__input-text
+{
+    border: 1px solid rgba(193, 193, 193, 1);
+    border-radius: 10px;
+    font: 600 20px/1.22 "Montserrat";
+    margin-top: 16px;
+    padding: 9px 88px 8px 14px;
+    background-color: #1A1A18;
+
+}
+
+.login-form__elements__input-text::placeholder
+{
+    opacity: 0.5;
+}
+
+.login-form__elements__button
+{
+    font: 600 30px/1.22 "Montserrat";
+    color: white;
+    border-radius: 45px;
+    background: linear-gradient(to right bottom, rgba(96, 208, 9, 1), rgba(12, 228, 99, 1));
+    border: none;
+    max-width: 306px;
+    margin-top: 46px;
+    padding: 17px 85px;
 }
 
 .main
 {
-    background: url("../images/main-background.png") no-repeat;
+    background: url("../img/main-background.png") no-repeat;
     background-size: 100%;
 }
 
@@ -161,59 +213,4 @@ section
     color: white;
     font: 600 36px/1.3 "Kodchasan";
     padding-left: 80px;
-
-}
-
-.login-button
-{
-    background: white;
-    border-radius: 33px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 80px;
-}
-
-.login-button:visited,
-.login-button:hover,
-.login-button:focus
-{
-    color: black;
-}
-.login-button__text
-{
-    font: 600 20px/1.22 "Montserrat";
-    margin-left: 26px;
-    margin-right: 26px;
-}
-
-.title
-{
-    color: white;
-    font: 600 96px/1.22 "Montserrat";
-    max-width: 1143px;
-    text-align: center;
-}
-
-.register-button
-{
-    background: linear-gradient(to right bottom, rgba(255, 184, 0, 1), rgba(255, 229, 0, 1));
-    border-radius: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 43%;
-}
-
-.register-button:visited,
-.register-button:hover,
-.register-button:focus
-{
-    color: black;
-}
-.register-button__text
-{
-    font: 600 48px/1.22 "Montserrat";
-    margin-top: 38px;
-    margin-bottom: 38px;
 }
