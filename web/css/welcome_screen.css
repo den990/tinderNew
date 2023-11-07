@@ -172,6 +172,7 @@ section
     align-items: center;
     justify-content: center;
     margin-right: 80px;
+    color: black;
 }
 
 .login-button:visited,
@@ -203,9 +204,11 @@ section
     align-items: center;
     justify-content: center;
     width: 43%;
+    color: black;
 }
 
 .register-button:visited,
+.register-button:active
 .register-button:hover,
 .register-button:focus
 {
