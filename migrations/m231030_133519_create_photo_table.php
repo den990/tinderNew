@@ -21,7 +21,7 @@ class m231030_133519_create_photo_table extends Migration
         $this->createTable('{{%photo}}', [
             'id_photo' => $this->primaryKey(),
             'path' => $this->string()->notNull(),
-            'id_user' => $this->integer()->notNull(),
+            'id_user' => $this->integer(),
         ], $tableOptions);
         $this->addForeignKey('fk-photo-user_id', '{{%photo}}', 'id_user', '{{%user}}', 'id_user', 'CASCADE', 'CASCADE');
     }

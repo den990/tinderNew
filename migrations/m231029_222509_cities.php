@@ -13,12 +13,24 @@ class m231029_222509_cities extends Migration
      */
     public function up()
     {
-        $this->batchInsert('{{%city}}', ['name'], array_map(
+        $tableOptions = null;
+        if ($this->db->driverName === 'mysql') {
+            // https://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+        $this->createTable('{{%city}}', [
+            'id' => $this->primaryKey()->unsigned(),
+            'name' => $this->string()->notNull(),
+        ], $tableOptions);
+
+        $cities = array_map(
             function ($name) {
                 return [$name];
             },
-            array_values(Cities::listData())
-        ));
+            array_keys(Cities::listData())
+        );
+
+        $this->batchInsert('{{%city}}', ['name'], $cities);
     }
 
     /**

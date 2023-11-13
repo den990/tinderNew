@@ -63,6 +63,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+
         return $this->render('index');
     }
 
@@ -109,7 +110,7 @@ class SiteController extends Controller
     public function actionRegistration()
     {
         $model = new UserTinder();
-        $cities = array_keys(\app\models\enums\Cities::$list);
+        $cities = array_keys(\app\models\enums\Cities::$codeToValue);
 
         return $this->render('registration', [
             'model' => $model,

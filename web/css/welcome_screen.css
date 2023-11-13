@@ -220,3 +220,8 @@ section
     margin-top: 38px;
     margin-bottom: 38px;
 }
+
+.user-photo
+{
+    border-radius: 50%;
+}

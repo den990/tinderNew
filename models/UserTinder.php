@@ -19,8 +19,8 @@ use yii\web\IdentityInterface;
  * @property string $email
  * @property string $password_hash
  * @property string $description
- * @property string $location
- * @property string $photo
+ * @property integer $location
+ * @property integer $photo
  */
 
 class UserTinder extends ActiveRecord implements IdentityInterface
@@ -57,6 +57,11 @@ class UserTinder extends ActiveRecord implements IdentityInterface
     public function getId()
     {
         return $this->getPrimaryKey();
+    }
+
+    public function getPhotoId()
+    {
+        return $this->photo;
     }
 
 

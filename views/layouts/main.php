@@ -10,6 +10,8 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use app\models\UserTinder;
+use app\models\Photo;
 
 WelcomeScreenAsset::register($this);
 
@@ -41,9 +43,15 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             <span class="login-button__text" id="login-text">Войти</span>
         </a>
     <?php else: ?>
-
-        <a  class="login-button">
-            <span class="login-button__text" id="login-text">Вы вошли</span>
+        <?php
+            $yiiUserId = Yii::$app->user->getId();
+            $user = UserTinder::find()->where(['id_user'=> $yiiUserId])->one();
+            $photoId = $user->getPhotoId();
+            $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
+            $photoPath = $modelPhoto->getImageUrl();
+        ?>
+        <a  class="login-button" style="width: 100px; height: 100px; background: none; border-radius: 0">
+            <?= Html::img($photoPath, ['class' => 'user-photo', 'alt' => 'User Photo', 'width' => '100px', 'height' => '100px']) ?>
         </a>
     <?php endif; ?>
 

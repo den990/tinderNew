@@ -33,5 +33,8 @@ class LoginController extends Controller
                     //TODO обработать если юзера нет
                 }
         }
+        return $this->render('@app/views/site/login', [
+            'model' => $model,
+        ]);
     }
 }
