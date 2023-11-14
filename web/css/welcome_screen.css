@@ -221,6 +221,24 @@ section
     margin-bottom: 38px;
 }
 
+@media screen and (max-width: 1600px)
+{
+    .title
+    {
+        font: 600 54px/1.22 "Montserrat";
+    }
+    .register-button
+    {
+        width: 33%;
+    }
+    .register-button__text
+    {
+        font: 600 24px/1.22 "Montserrat";
+        margin-top: 19px;
+        margin-bottom: 19px;
+    }
+}
+
 .user-photo
 {
     border-radius: 50%;
