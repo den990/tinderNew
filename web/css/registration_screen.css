@@ -143,7 +143,7 @@ a {
 
 .main
 {
-    background: url("../img/registration-background.png") no-repeat;
+    background: url("../images/registration-background.png") no-repeat;
 }
 
 .logo
@@ -232,15 +232,13 @@ a {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../img/caret.svg") 96% / 4% no-repeat;
-    background-color: rgba(26, 26, 24, 1);
+    background: rgba(26, 26, 24, 1) url("../images/caret.svg") no-repeat 96% 50%;
     padding: 9px 0 8px 22px;
 }
 
 .big-select
 {
-    background: url("../img/caret.svg") 96% / 6% no-repeat;
-    background-color: rgba(26, 26, 24, 1);
+    background: rgba(26, 26, 24, 1) url("../images/caret.svg") no-repeat 96% 50%;
 }
 
 .register-form__elements__button
