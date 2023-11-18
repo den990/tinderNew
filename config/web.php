@@ -48,7 +48,11 @@ $config = [
             'rules' => [
                 'index' => 'site/index',
                 'registration' => 'site/registration',
-                'login' => 'site/login'
+                'login' => 'site/login',
+                'profile' => 'site/profile',
+                'message' => 'site/message',
+                'notification' => 'site/notification',
+                'find' => 'site/find'
             ],
         ],
 

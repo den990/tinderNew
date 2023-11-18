@@ -57,7 +57,7 @@ class RegistrationController extends Controller
                 }
 
         }
-        $cities = array_keys(\app\models\enums\Cities::$codeToValue);
+        $cities = array_keys(Cities::$codeToValue);
         return $this->render('@app/views/site/registration', [
 
             'model' => $modelTinderUser,

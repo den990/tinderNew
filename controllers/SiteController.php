@@ -110,7 +110,7 @@ class SiteController extends Controller
     public function actionRegistration()
     {
         $model = new UserTinder();
-        $cities = array_keys(\app\models\enums\Cities::$codeToValue);
+        $cities = array_keys(Cities::$codeToValue);
 
         return $this->render('registration', [
             'model' => $model,
@@ -127,5 +127,59 @@ class SiteController extends Controller
     {
         $model = new UserTinder();
         return $this->render('login',[ 'model' => $model]);
+    }
+
+    public function actionProfile()
+    {
+        $model = new UserTinder();
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->render('login', ['model' => $model]);
+        }
+        else
+        {
+            $cities = array_keys(Cities::$codeToValue);
+            //нужно получить user чтобы по дфеолту в input стояли значения юзера
+            return $this->render('profile', ['model' => $model]);
+        }
+    }
+
+    public function  actionMessage()
+    {
+        $model = new UserTinder();
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->render('login', ['model' => $model]);
+        }
+        else
+        {
+            return $this->render('message');
+        }
+    }
+
+    public function actionNotification()
+    {
+        $model = new UserTinder();
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->render('login', ['model' => $model]);
+        }
+        else
+        {
+            return $this->render('notification');
+        }
+    }
+
+    public function actionFind()
+    {
+        $model = new UserTinder();
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->render('login', ['model' => $model]);
+        }
+        else
+        {
+            return $this->render('find');
+        }
     }
 }
