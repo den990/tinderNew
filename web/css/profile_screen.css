@@ -130,37 +130,6 @@ html {
     display: none;
   }
 
-.main
-{
-    background: url("../img/main-background.png") no-repeat;
-    background-size: 100%;
-}
-header
-{
-    display: flex;
-    padding-top: 26px;
-    padding-right: 2%;
-    justify-content: space-between;
-}
-.logo
-{
-    color: white;
-    font: 600 36px/1.3 "Kodchasan";
-    padding-left: 80px;
-    padding-top: 24px;
-}
-.user-block
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 20%;
-}
-.user-block__img
-{
-    border-radius: 50%;
-}
-
 .profile-editing
 {
     width: 1276px;
@@ -180,7 +149,7 @@ header
 
 .profile-editing__title-bar__text
 {
-    font: 500 36px/1.3 "Kodchasan";
+    font: 500 36px/1.3 'Montserrat';
     color: white;
 }
 
@@ -206,6 +175,7 @@ header
     border-radius: 20px;
     padding: 19px 12px 20px 27px;
     font: 600 24px/1.22 'Montserrat';
+    color: white;
 }
 
 .input-text_big
@@ -245,15 +215,13 @@ input::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../img/icon_edit.svg") 90% / 30% no-repeat;
-    background-color: rgba(26, 26, 24, 1);
+    background: rgba(26, 26, 24, 1) url("../images/icon_edit.svg") no-repeat 90% 50%;
 }
 
 .profile-editing__fields__text-fields__date
 {
     border: 1px solid rgba(193, 193, 193, 1);
     border-radius: 14px;
-    margin-top: 30px;
     padding: 19px 287px 20px 27px;
     font: 600 24px/1.22 'Montserrat';
     color: white;
@@ -271,8 +239,7 @@ input::-webkit-calendar-picker-indicator {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background: url("../img/icon_edit.svg") 98% / 8% no-repeat;
-    background-color: rgba(26, 26, 24, 1);
+    background: rgba(26, 26, 24, 1) url("../images/icon_edit.svg") no-repeat 98% 50%;
 }
 
 .big-text
@@ -281,3 +248,106 @@ input::-webkit-calendar-picker-indicator {
     max-width: 100%;
     padding: 92px 178px 93px 156px;
 }
+
+@media screen and (max-width: 1600px)
+{
+    .profile-editing
+    {
+        width: 900px;
+        height: 390px;
+    }
+    .profile-editing__title-bar
+    {
+        height: 30px;
+        padding-top: 10px;
+    }
+    .profile-editing__title-bar__text
+    {
+        font-size: 24px;
+    }
+    .profile-editing__fields
+    {
+        padding-top: 20px;
+    }
+    .profile-editing__fields__text-fields
+    {
+        padding-left: 40px;
+    }
+    .profile-editing__fields__text-fields__name-block
+    {
+        display: flex;
+        flex-direction: row;
+    }
+    .profile-editing__fields_text-fields_additional-info
+    {
+        display: flex;
+        flex-direction: row;
+        padding-top: 20px;
+    }
+    .profile-editing__fields__text-fields__input-text
+    {
+        font-size: 16px;
+        padding: 5px 3px 5px 14px;
+        max-width: 180px;
+    }
+    .profile-editing__fields__text-fields__input-select
+    {
+        font-size: 16px;
+        padding: 5px 16px 5px 14px;
+        background: rgba(26, 26, 24, 1) url("../images/icon_edit.svg") no-repeat 90% / 20%;
+    }
+    .profile-editing__fields__text-fields__date
+    {
+        font-size: 16px;
+        padding: 5px 132px 5px 14px;
+        max-width: 200px;
+    }
+    .profile-editing__fields__text-fields__input-select__city
+    {
+        font-size: 16px;
+        padding: 5px 257px 5px 14px;
+        margin-top: 20px;
+        background: rgba(26, 26, 24, 1) url("../images/icon_edit.svg") no-repeat 98% / 6%;
+    }
+    .big-text
+    {
+        margin-top: 20px;
+        padding-right: 204px;
+        max-width: 100%;
+    }
+    .profile-editing__fields__photo-button-block
+    {
+        display: flex;
+        flex-direction: column;
+        padding-left: 100px;
+    }
+    .profile-editing__fields__photo-button-block__submit-button
+    {
+        margin-top: 226px;
+        background: linear-gradient(to right bottom, rgba(96, 208, 9, 1), rgba(12, 228, 99, 1));
+        color: white;
+        border-radius: 45px;
+        max-width: 538px;
+        padding: 5px 44px;
+        font: 600 20px/1.22 'Montserrat';
+        border: none;
+    }
+}
+
+input::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+input::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+input:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+input:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+input:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+input:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+input:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+input:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}
+
+textarea::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+textarea::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+textarea:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+textarea:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+textarea:focus::-webkit-input-placeholder {opacity: 0; transition: opacity 0.3s ease;}
+textarea:focus::-moz-placeholder          {opacity: 0; transition: opacity 0.3s ease;}
+textarea:focus:-moz-placeholder           {opacity: 0; transition: opacity 0.3s ease;}
+textarea:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s ease;}

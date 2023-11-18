@@ -236,11 +236,6 @@ a {
     padding: 9px 0 8px 22px;
 }
 
-.big-select
-{
-    background: rgba(26, 26, 24, 1) url("../images/caret.svg") no-repeat 96% 50%;
-}
-
 .register-form__elements__button
 {
     font: 600 30px/1.22 "Montserrat";
@@ -274,4 +269,34 @@ input::-webkit-calendar-picker-indicator {
 {
     max-width: 279px;
     padding: 9px 0 8px 22px;
+}
+
+@media screen and (max-width: 1600px)
+{
+    .register-form
+    {
+        margin-top: 41px;
+        height: 520px;
+        max-width: 35%;
+    }
+    .register-form__title
+    {
+        font: 600 20px/1.22 "Montserrat";
+    }
+    .register-form__elements__input-text, .register-form__elements__input-date, .register-form__elements__input-select
+    {
+        margin-top: 15px;
+        font: 600 14px/1.22 "Montserrat";
+    }
+    .small-field
+    {
+        max-width: 220px;
+        padding: 5px 0 4px 11px;
+    }
+    .register-form__elements__button
+    {
+        font: 600 20px/1.22 "Montserrat";
+        margin-left: 60px;
+        margin-top: 30px;
+    }
 }
