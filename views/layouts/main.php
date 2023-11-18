@@ -4,7 +4,7 @@
 /** @var string $content */
 
 use app\assets\AppAsset;
-use app\assets\WelcomeScreenAsset;
+use app\assets\MainScreenAsset;
 use app\widgets\Alert;
 use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
@@ -13,7 +13,7 @@ use yii\bootstrap5\NavBar;
 use app\models\UserTinder;
 use app\models\Photo;
 
-WelcomeScreenAsset::register($this);
+MainScreenAsset::register($this);
 
 $this->registerCsrfMetaTags();
 $this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
@@ -50,7 +50,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
             $photoPath = $modelPhoto->getImageUrl();
         ?>
-        <a  class="login-button" style="width: 100px; height: 100px; background: none; border-radius: 0">
+        <a href="<?= Yii::$app->urlManager->createUrl(['site/profile']) ?>" class="login-button" style="width: 100px; height: 100px; background: none; border-radius: 0">
             <?= Html::img($photoPath, ['class' => 'user-photo', 'alt' => 'User Photo', 'width' => '100px', 'height' => '100px']) ?>
         </a>
     <?php endif; ?>
