@@ -31,7 +31,7 @@ $this->title = "Profile";
                 <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'profile-editing__fields__text-fields__input-text input-text_big field-padding'])->label(false) ?>
             </div>
             <div class="profile-editing__fields_text-fields_additional-info">
-                <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'profile-editing__fields__text-fields__input-select'])->label(false) ?>
+                <?= $form->field($model, 'gender')->dropDownList(['0' => 'Мужской', '1' => 'Женский'], ['class' => 'profile-editing__fields__text-fields__input-select'])->label(false) ?>
                 <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
                     'options' => ['class' => 'profile-editing__fields__text-fields__date field-padding'],
                     'clientOptions' => [
@@ -57,9 +57,11 @@ $this->title = "Profile";
             <?php $photoId = $model->getPhotoId();
             $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
             $photoPath = $modelPhoto->getImageUrl();?>
-            <?= Html::img($photoPath, ['class' => 'user-photo', 'id' => 'display-image', 'alt' => 'User Photo', 'width' => '100px', 'height' => '100px']) ?>
+            <?= Html::img($photoPath, ['class' => 'user-photo', 'id' => 'display-image', 'alt' => 'User Photo', 'width' => '200px', 'height' => '200px']) ?>
             <?= $form->field($model, 'photo')->fileInput(['id' => 'upload', 'onchange' => 'handleImageUpload()'])->label(false) ?>
+            <div>
             <?= Html::submitButton('Сохранить', ['class' => 'profile-editing__fields__photo-button-block__submit-button']) ?>
+            </div>
         </div>
     </div>
 

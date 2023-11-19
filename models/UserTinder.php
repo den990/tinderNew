@@ -31,6 +31,7 @@ class UserTinder extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
+            ['photo', 'required', 'message' => 'Загрузите аватар'],
             [['first_name', 'last_name', 'gender', 'birthday', 'email', 'password_hash', 'location'], 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],

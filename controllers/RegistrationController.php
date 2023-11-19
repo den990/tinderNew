@@ -18,11 +18,10 @@ class RegistrationController extends Controller
     {
         $modelTinderUser = new UserTinder();
 
-        $modelTinderUser->photo = UploadedFile::getInstance($modelTinderUser, 'photo');
         if (Yii::$app->request->isPost) {
             $postData = Yii::$app->request->post();
             $modelTinderUser->load($postData);
-
+            $modelTinderUser->photo = UploadedFile::getInstance($modelTinderUser, 'photo');
             if ($modelTinderUser->validate()) {
                 $password = $modelTinderUser->password_hash;
                 $modelTinderUser->setPassword($password);

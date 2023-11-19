@@ -302,10 +302,11 @@ input::-webkit-calendar-picker-indicator {
     {
         font-size: 16px;
         padding: 5px 132px 5px 14px;
-        max-width: 300px;
+        max-width: 250px;
     }
     .profile-editing__fields__text-fields__input-select__city
     {
+        max-width: 385px;
         font-size: 16px;
         padding: 5px 257px 5px 14px;
         margin-top: 20px;
@@ -325,7 +326,7 @@ input::-webkit-calendar-picker-indicator {
     }
     .profile-editing__fields__photo-button-block__submit-button
     {
-        margin-top: 226px;
+        margin-top: 9%;
         background: linear-gradient(to right bottom, rgba(96, 208, 9, 1), rgba(12, 228, 99, 1));
         color: white;
         border-radius: 45px;

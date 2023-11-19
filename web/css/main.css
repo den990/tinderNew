@@ -144,6 +144,14 @@ section
     padding-top: 180px;
 }
 
+.block__user
+{
+    display: flex;
+    justify-content: space-between;
+    margin-top: -1%;
+    align-items: center;
+    width: 20%;
+}
 .header
 {
     display: flex;
@@ -166,7 +174,7 @@ section
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 80px;
+    margin-right: 50px;
     color: black;
 }
 

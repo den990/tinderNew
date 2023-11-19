@@ -50,9 +50,14 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
             $photoPath = $modelPhoto->getImageUrl();
         ?>
-        <a href="<?= Yii::$app->urlManager->createUrl(['site/profile']) ?>" class="login-button" style="width: 100px; height: 100px; background: none; border-radius: 0">
-            <?= Html::img($photoPath, ['class' => 'user-photo', 'alt' => 'User Photo', 'width' => '100px', 'height' => '100px']) ?>
-        </a>
+        <div class="block__user">
+            <a href="<?= Yii::$app->urlManager->createUrl(['site/notification']) ?>"><img src="/images/icon_notification.svg" width="35px" height="45px"> </a>
+            <a href="<?= Yii::$app->urlManager->createUrl(['site/message']) ?>"><img src="/images/icon_message.svg" width="35px" height="35px"> </a>
+            <a href="<?= Yii::$app->urlManager->createUrl(['site/profile']) ?>" class="login-button" style="width: 100px; height: 100px; background: none; border-radius: 0">
+                <?= Html::img($photoPath, ['class' => 'user-photo', 'alt' => 'User Photo', 'width' => '75px', 'height' => '75px']) ?>
+            </a>
+        </div>
+
     <?php endif; ?>
 
 

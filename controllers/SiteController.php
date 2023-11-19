@@ -110,13 +110,19 @@ class SiteController extends Controller
 
     public function actionRegistration()
     {
-        $model = new UserTinder();
-        $cities = array_keys(Cities::$codeToValue);
+        if (Yii::$app->user->isGuest) {
+            $model = new UserTinder();
+            $cities = array_keys(Cities::$codeToValue);
 
-        return $this->render('registration', [
-            'model' => $model,
-            'cities' => $cities,
-        ]);
+            return $this->render('registration', [
+                'model' => $model,
+                'cities' => $cities,
+            ]);
+        }
+        else
+        {
+            return $this->goHome();
+        }
     }
     /**
      * Login action.
@@ -126,8 +132,14 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
-        $model = new UserTinder();
-        return $this->render('login',[ 'model' => $model]);
+        if (Yii::$app->user->isGuest) {
+            $model = new UserTinder();
+            return $this->render('login', ['model' => $model]);
+        }
+        else
+        {
+            return $this->goHome();
+        }
     }
 
     public function actionProfile()
