@@ -34,6 +34,7 @@ class UserTinder extends ActiveRecord implements IdentityInterface
             [['first_name', 'last_name', 'gender', 'birthday', 'email', 'password_hash', 'location'], 'required'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],
+            ['location', 'compare', 'compareValue' => '0', 'operator' => '!=', 'message' => 'Выберите город'],
         ];
     }
 

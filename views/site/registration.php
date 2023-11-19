@@ -52,7 +52,13 @@ $this->registerJs("
         <?= $form->field($model, 'email')->textInput(['placeholder' => 'E-mail', 'class' => 'register-form__elements__input-text'])->label(false) ?>
         <?= $form->field($model, 'password_hash')->passwordInput(['placeholder' => 'Пароль', 'class' => 'register-form__elements__input-text'])->label(false) ?>
         <?= $form->field($model, 'password_confirming')->passwordInput(['placeholder' => 'Подтверждение пароля', 'class' => 'register-form__elements__input-text'])->label(false) ?>
-        <?= $form->field($model, 'location')->dropDownList($cities, ['class' => 'register-form__elements__input-select'])->label(false) ?>
+        <?= $form->field($model, 'location')->dropDownList($cities, [
+                'class' => 'register-form__elements__input-select',
+                'options' => [
+                            '0' => ['disabled' => true, 'selected' => true],
+                ],
+
+        ])->label(false) ?>
         <?= Html::submitButton('Найти себе пару', ['class' => 'register-form__elements__button']) ?>
         <?php ActiveForm::end(); ?>
     </div>

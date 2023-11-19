@@ -44,7 +44,12 @@ $this->title = "Profile";
 
             </div>
 
-            <?= $form->field($model, 'location')->dropDownList($cities, ['class' => 'profile-editing__fields__text-fields__input-select__city'])->label(false) ?>
+            <?= $form->field($model, 'location')->dropDownList($cities, [
+                    'class' => 'profile-editing__fields__text-fields__input-select__city',
+                    'options' => [
+                            '0' => ['disabled' => true, 'selected' => true],
+                        ],
+            ])->label(false) ?>
 
             <?= $form->field($model, 'description')->textarea(['placeholder' => 'Дополнительная информация', 'class' => 'profile-editing__fields__text-fields__input-text big-text', 'rows' => '6'])->label(false) ?>
         </div>

@@ -21,6 +21,7 @@ class Cities extends BaseEnum
      * @var array
      */
     public static $codeToValue = [
+        'Выберите город' => 0,
         'Абаза' => 1,
         'Абакан' => 2,
         'Абдулино' => 3,

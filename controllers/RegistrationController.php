@@ -4,6 +4,7 @@ namespace app\controllers;
 use app\models\enums\Cities;
 use yii\base\Model;
 use app\models\UserTinder;
+use yii\base\NotSupportedException;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use Yii;
@@ -18,7 +19,6 @@ class RegistrationController extends Controller
         $modelTinderUser = new UserTinder();
 
         $modelTinderUser->photo = UploadedFile::getInstance($modelTinderUser, 'photo');
-
         if (Yii::$app->request->isPost) {
             $postData = Yii::$app->request->post();
             $modelTinderUser->load($postData);
@@ -28,10 +28,7 @@ class RegistrationController extends Controller
                 $modelTinderUser->setPassword($password);
                     $photo = $modelTinderUser->photo;
                     $path = '@app/web/photoUsers';
-                    if ($modelTinderUser->location != null)
-                    {
-                        $modelTinderUser->location++;
-                    }
+
                     // Сохранение фотографии пользователя
                     if ($modelTinderUser->photo) {
                         $modelPhoto = new Photo();
@@ -52,17 +49,17 @@ class RegistrationController extends Controller
                         return $this->redirect(['site/index']);
                     } else {
                         Yii::$app->session->setFlash('error', 'Произошла ошибка при сохранении данных.');
+                        $cities = array_keys(Cities::$codeToValue);
+                        return $this->render('@app/views/site/registration', [
+
+                            'model' => $modelTinderUser,
+                            'cities' => $cities,
+                        ]);
                     }
                 } else {
-                    Yii::$app->session->setFlash('error', 'Произошла ошибка при сохранении данных.');
+                throw new NotSupportedException('Not validation');
                 }
-
         }
-        $cities = array_keys(Cities::$codeToValue);
-        return $this->render('@app/views/site/registration', [
 
-            'model' => $modelTinderUser,
-            'cities' => $cities,
-        ]);
     }
 }

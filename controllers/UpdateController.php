@@ -50,9 +50,6 @@ class UpdateController extends Controller
                     }
 
                     foreach (array_keys($changedAttributes) as $key) {
-                        if ($key == 'location') {
-                            $existingUserTinder->$key = $modelTinderUser->$key++;
-                        }
                         if ($key == 'photo') {
                             continue;
                         }

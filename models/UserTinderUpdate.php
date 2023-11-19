@@ -35,6 +35,7 @@ class UserTinderUpdate extends ActiveRecord implements IdentityInterface
             [['first_name', 'last_name', 'gender', 'birthday', 'location'], 'required'],
             ['description', 'string'],
             ['photo', 'file', 'extensions' => ['jpg', 'jpeg', 'png', 'gif'], 'maxSize' => 1024 * 1024 * 2, 'skipOnEmpty' => true],
+            ['location', 'compare', 'compareValue' => '0', 'operator' => '!=', 'message' => 'Выберите город'],
         ];
     }
 
