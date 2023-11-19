@@ -31,7 +31,7 @@ $this->title = "Profile";
                 <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'profile-editing__fields__text-fields__input-text input-text_big field-padding'])->label(false) ?>
             </div>
             <div class="profile-editing__fields_text-fields_additional-info">
-                <?= $form->field($model, 'gender')->dropDownList(['' => 'Пол', 'Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'profile-editing__fields__text-fields__input-select'])->label(false) ?>
+                <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'profile-editing__fields__text-fields__input-select'])->label(false) ?>
                 <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
                     'options' => ['class' => 'profile-editing__fields__text-fields__date field-padding'],
                     'clientOptions' => [
