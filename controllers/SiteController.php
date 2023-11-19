@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\enums\Cities;
 use app\models\UserTinder;
+use app\models\UserTinderUpdate;
 
 class SiteController extends Controller
 {
@@ -134,13 +135,20 @@ class SiteController extends Controller
         $model = new UserTinder();
         if (Yii::$app->user->isGuest)
         {
-            return $this->render('login', ['model' => $model]);
+            return $this->render('login', [
+                'model' => $model,
+            ]);
         }
         else
         {
+            $userId = Yii::$app->user->getId();
+            $model = UserTinderUpdate::find()->where(['id_user' => $userId])->one();
+            //gender не совсем правильно отображается
             $cities = array_keys(Cities::$codeToValue);
-            //нужно получить user чтобы по дфеолту в input стояли значения юзера
-            return $this->render('profile', ['model' => $model]);
+            return $this->render('profile', [
+                'model' => $model,
+                'cities' => $cities
+            ]);
         }
     }
 

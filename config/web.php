@@ -50,6 +50,7 @@ $config = [
                 'registration' => 'site/registration',
                 'login' => 'site/login',
                 'profile' => 'site/profile',
+                'profile' => 'update/update',
                 'message' => 'site/message',
                 'notification' => 'site/notification',
                 'find' => 'site/find'

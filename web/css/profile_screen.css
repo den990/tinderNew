@@ -129,7 +129,9 @@ html {
   [hidden] {
     display: none;
   }
-
+  textarea{
+      resize: none;
+  }
 .profile-editing
 {
     width: 1276px;
@@ -300,7 +302,7 @@ input::-webkit-calendar-picker-indicator {
     {
         font-size: 16px;
         padding: 5px 132px 5px 14px;
-        max-width: 200px;
+        max-width: 300px;
     }
     .profile-editing__fields__text-fields__input-select__city
     {

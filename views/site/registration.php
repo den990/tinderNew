@@ -42,6 +42,10 @@ $this->registerJs("
         </div>
         <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
             'options' => ['class' => 'register-form__elements__input-date'],
+            'clientOptions' => [
+                'changeMonth' => true,
+                'changeYear' => true,
+                'yearRange' => '1980:2080',],
             'language' => 'ru', // Укажите нужный язык
             'dateFormat' => 'yyyy-MM-dd', // Формат даты
         ])->label(false) ?>

@@ -12,4 +12,8 @@ class ProfileScreenAsset extends AssetBundle
     public $css = [
         'css/profile_screen.css',
     ];
+
+    public $js = [
+        'js/handle_updatePhoto.js',
+    ];
 }
