@@ -62,17 +62,20 @@ class UpdateController extends Controller
                     if (!$existingUserTinder->save()) {
                         throw new NotSupportedException('User not saved');
                     }
+                    $modelTinderUser = UserTinderUpdate::find()->where(['id_user' => $existingId])->one();
                     return $this->render('@app/views/site/profile', [
-                        'model' => $existingUserTinder,
+                        'model' => $modelTinderUser,
                         'cities' => $cities,
                     ]);
                 } else {
+                    $modelTinderUser = UserTinderUpdate::find()->where(['id_user' => $existingId])->one();
                     return $this->render('@app/views/site/profile', [
-                        'model' => $existingUserTinder,
+                        'model' => $modelTinderUser,
                         'cities' => $cities,
                     ]);
                 }
             } else {
+                var_dump($modelTinderUser->getErrors());
                 throw new NotSupportedException('Incorrect data');
             }
         }
