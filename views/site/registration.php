@@ -34,7 +34,7 @@ $this->registerJs("
             <div class="register-form__elements__block-with-photo__info">
                 <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Имя', 'class' => 'register-form__elements__input-text small-field'])->label(false) ?>
                 <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'register-form__elements__input-text small-field'])->label(false) ?>
-                <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'register-form__elements__input-select big-select'])->label(false) ?>
+                <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'register-form__elements__input-select'])->label(false) ?>
             </div>
             <div class="register-form__elements__block-with-photo__photo-picker">
                 <?= $form->field($model, 'photo')->fileInput()->label(false) ?>
@@ -51,9 +51,9 @@ $this->registerJs("
         ])->label(false) ?>
         <?= $form->field($model, 'email')->textInput(['placeholder' => 'E-mail', 'class' => 'register-form__elements__input-text'])->label(false) ?>
         <?= $form->field($model, 'password_hash')->passwordInput(['placeholder' => 'Пароль', 'class' => 'register-form__elements__input-text'])->label(false) ?>
-        <?= $form->field($model, 'password_confirming')->passwordInput(['placeholder' => 'Подтверждение пароля', 'class' => 'register-form__elements__input-text'])->label(false) ?>
+        <?= $form->field($model, 'password_confirming')->passwordInput(['placeholder' => 'Подтверждение пароля', 'class' => 'register-form__elements__input-text big-input-text'])->label(false) ?>
         <?= $form->field($model, 'location')->dropDownList($cities, [
-                'class' => 'register-form__elements__input-select',
+                'class' => 'register-form__elements__input-select big-select',
                 'options' => [
                             '0' => ['disabled' => true, 'selected' => true],
                 ],
