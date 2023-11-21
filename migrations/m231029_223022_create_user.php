@@ -46,8 +46,8 @@ class m231029_223022_create_user extends Migration
      */
     public function down()
     {
-        $this->dropForeignKey('fk-user-location', '{{%user}');
-        $this->dropTable('{{%user}');
+        $this->dropForeignKey('fk-user-location', '{{%user}}');
+        $this->dropTable('{{%user}}');
     }
 
 

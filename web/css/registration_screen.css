@@ -220,7 +220,7 @@ a {
     border: 1px solid rgba(193, 193, 193, 1);
     border-radius: 14px;
     margin-top: 30px;
-    padding: 9px 235px 8px 22px;
+    padding: 9px 245px 8px 22px;
     font: 600 20px/1.22 "Montserrat";
     color: rgba(193, 193, 193, 1);
     background-color: rgba(26, 26, 24, 1);
@@ -285,8 +285,12 @@ input::-webkit-calendar-picker-indicator {
     }
     .register-form__elements__input-text, .register-form__elements__input-date, .register-form__elements__input-select
     {
+        max-width: 100%;
         margin-top: 15px;
         font: 600 14px/1.22 "Montserrat";
+        padding-top: 5px;
+        padding-bottom: 4px;
+        padding-left: 11px;
     }
     .small-field
     {
@@ -298,5 +302,14 @@ input::-webkit-calendar-picker-indicator {
         font: 600 20px/1.22 "Montserrat";
         margin-left: 60px;
         margin-top: 30px;
+    }
+    .big-select
+    {
+        width: 94%;
+    }
+    .big-input-text
+    {
+        width: 415px;
+        padding-right: 0;
     }
 }

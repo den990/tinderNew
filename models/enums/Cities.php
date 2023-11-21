@@ -6,9 +6,6 @@ use yii2mod\enum\helpers\BaseEnum;
 
 class Cities extends BaseEnum
 {
-
-
-
     /**
      * @var string message category
      * You can set your own message category for translate the values in the $list property

@@ -1,12 +1,11 @@
 <?php
 
-use app\models\enums\Cities;
 use yii\db\Migration;
-
+use app\models\enums\Status;
 /**
- * Class m231029_222509_cities
+ * Handles the creation of table `{{%status}}`.
  */
-class m231029_222509_cities extends Migration
+class m231130_193651_create_status_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,19 +17,19 @@ class m231029_222509_cities extends Migration
             // https://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
-        $this->createTable('{{%city}}', [
+        $this->createTable('{{%status}}', [
             'id' => $this->primaryKey()->unsigned(),
-            'name' => $this->string()->notNull(),
+            'status' => $this->string()->notNull(),
         ], $tableOptions);
 
-        $cities = array_map(
+        $status = array_map(
             function ($name) {
                 return [$name];
             },
-            array_keys(Cities::$codeToValue)
+            array_keys(Status::$state)
         );
 
-        $this->batchInsert('{{%city}}', ['name'], $cities);
+        $this->batchInsert('{{%status}}', ['status'], $status);
     }
 
     /**
@@ -38,21 +37,6 @@ class m231029_222509_cities extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%city}}');
+        $this->dropTable('{{%status}}');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m231029_222509_cities cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
