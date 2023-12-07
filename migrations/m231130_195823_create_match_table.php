@@ -55,6 +55,6 @@ class m231130_195823_create_match_table extends Migration
         $this->dropForeignKey('fk-user_id_1-match-id_user-user', '{{%match}}');
         $this->dropForeignKey('fk-user_id_2-match-id_user-user', '{{%match}}');
         $this->dropForeignKey('fk-match-status', '{{%match}}');
-        $this->dropTable('{{%like}}');
+        $this->dropTable('{{%match}}');
     }
 }
