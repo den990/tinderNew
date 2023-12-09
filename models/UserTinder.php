@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DateTime;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -14,7 +15,7 @@ use yii\web\IdentityInterface;
  * @property integer $id_user
  * @property string $first_name
  * @property string $last_name
- * @property string $gender
+ * @property integer $gender
  * @property string $birthday
  * @property string $email
  * @property string $password_hash
@@ -42,6 +43,19 @@ class UserTinder extends ActiveRecord implements IdentityInterface
     public static function tableName()
     {
         return '{{%user}}';
+    }
+
+    public function getAge()
+    {
+        try {
+            $birthDate = new \DateTime($this->birthday);
+            $currentDate = new \DateTime();
+            $age = $currentDate->diff($birthDate)->y;
+            return $age;
+        } catch (\Exception $e) {
+            Yii::error('Error calculating age: ' . $e->getMessage());
+            return 0; // Возвращаем 0 или другое значение по умолчанию в случае ошибки
+        }
     }
 
     public function behaviors()
@@ -85,5 +99,14 @@ class UserTinder extends ActiveRecord implements IdentityInterface
     public function setPassword($password)
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
+    }
+
+    public function serializeForFind()
+    {
+        return [
+            'first_name' => $this->first_name,
+            'age' => $this->getAge(),
+            'photoId' => $this->photo,
+        ];
     }
 }

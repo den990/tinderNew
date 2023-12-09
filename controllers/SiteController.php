@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\UserListFormForFind;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -199,7 +200,9 @@ class SiteController extends Controller
         }
         else
         {
-            return $this->render('find');
+            $modelUserListForm = new UserListFormForFind();
+            $modelUserListForm->users = $modelUserListForm->getUsersWithParameters();
+            return $this->render('find', ['users' => $modelUserListForm->serialize()]);
         }
     }
 }

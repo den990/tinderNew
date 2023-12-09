@@ -53,7 +53,8 @@ $config = [
                 'profile' => 'update/update',
                 'message' => 'site/message',
                 'notification' => 'site/notification',
-                'find' => 'site/find'
+                'find' => 'site/find',
+                'finding' => 'find/redirect',
             ],
         ],
 

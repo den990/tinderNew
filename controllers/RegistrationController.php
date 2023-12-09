@@ -42,7 +42,7 @@ class RegistrationController extends Controller
                         Yii::$app->session->setFlash('success', 'Регистрация успешна');
                         $modelPhoto->id_user = $modelTinderUser->getId();
                         $modelPhoto->path = $path . '/' . 'photoIdUser' . $modelTinderUser->getId() . '.' . $photo->extension;
-                        $photoExtension = 'png';
+                        $photoExtension = 'jpg';
                         $photo->saveAs(Yii::getAlias($path) . '/' . 'photoIdUser' . $modelTinderUser->getId() . '.' . $photoExtension);
                         $modelPhoto->save();
                         return $this->redirect(['site/index']);

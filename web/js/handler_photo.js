@@ -4,7 +4,10 @@ function cropImage(imageElement, topPercentage, bottomPercentage) {
 
     // Загружаем изображение
     var img = new Image();
-    img.src = "images/priora1.jpg";
+    var originalPath = canvas.getAttribute('data-photo-path');
+    img.src = originalPath.replace('@web/', '');
+
+    // Используем событие load для выполнения кода после загрузки изображения
     img.onload = function() {
         // Вычисляем размеры для обрезки
         var totalHeight = img.height;
@@ -19,7 +22,12 @@ function cropImage(imageElement, topPercentage, bottomPercentage) {
     };
 }
 
-// Дожидаемся загрузки страницы и вызываем cropImage после этого
-window.onload = function() {
-    cropImage(document.querySelector(".photo__user"), 0.3, 0.3);
-};
+// Вызываем cropImage после загрузки каждого изображения
+document.addEventListener('DOMContentLoaded', function() {
+    // Здесь вы можете выбрать все изображения, к которым вы хотите применить cropImage
+    var images = document.querySelectorAll(".photo__user");
+
+    images.forEach(function(image) {
+        cropImage(image, 0.3, 0.3);
+    });
+});
