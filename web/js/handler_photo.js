@@ -31,3 +31,45 @@ document.addEventListener('DOMContentLoaded', function() {
         cropImage(image, 0.3, 0.3);
     });
 });
+
+
+
+$(document).ready(function() {
+    // Функция для обновления профиля пользователя
+    function updateUserProfile() {
+        $.ajax({
+            url: '/find/update-profile', // Путь к вашему обработчику на сервере
+            type: 'POST',
+            dataType: 'json',
+            success: function(data) {
+                if (data && 'hasMoreProfiles' in data && 'profileHtml' in data) {
+                    if (data.hasMoreProfiles) {
+                        // Обновление профиля с новыми данными
+                        $('#user-card').html(data.profileHtml);
+                        var image = document.querySelector(".photo__user");
+                        cropImage(image, 0.3, 0.3);
+                    } else {
+                        // Все профили просмотрены
+                        $('#user-card').html('<p class="text-users-end">По вашим параметрам больше нет пользователей.</p>');
+                    }
+                } else {
+                    console.error('Неверный формат данных от сервера:', data);
+                }
+            },
+            error: function(error) {
+                console.error('Ошибка при обновлении профиля:', error);
+            }
+        });
+    }
+
+    // Обработчик для кнопки лайка
+    $(document).on('click', '.like-button', function() {
+        updateUserProfile();
+    });
+
+    // Обработчик для кнопки дизлайка
+    $(document).on('click', '.dislike-button', function() {
+        updateUserProfile();
+    });
+});
+

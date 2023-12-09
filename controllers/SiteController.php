@@ -65,7 +65,26 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
+//        for ($i = 1; $i <= 10; $i++) {
+//            $user = new UserTinder();
+//            $user->first_name = 'User1' . $i;
+//            $user->last_name = 'User1' . $i;
+//            $user->gender = 0;
+//            $user->birthday = '2020-12-01';
+//            $user->email = 'user1' . $i . '@mail.ru';
+//            $user->setPassword('qwertyui');
+//            $user->location = 1;
+//            $user->photo = 4;
+//
+//            // Сохранить пользователя в базу данных
+//            $user->save();
+//        }
+//        Yii::$app->session->remove('userListForm');
+//        Yii::$app->session->remove('limitCount');
+//        Yii::$app->session->remove('count');
+//        Yii::$app->session->removeAllFlashes();
+//        Yii::$app->session->removeAll();
+//        Yii::$app->user->logout();
         return $this->render('index');
     }
 
@@ -201,7 +220,7 @@ class SiteController extends Controller
         else
         {
             $modelUserListForm = new UserListFormForFind();
-            $modelUserListForm->users = $modelUserListForm->getUsersWithParameters();
+            $modelUserListForm->users = $modelUserListForm->getUsersWithParameters(0);
             return $this->render('find', ['users' => $modelUserListForm->serialize()]);
         }
     }

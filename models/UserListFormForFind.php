@@ -22,7 +22,7 @@ class UserListFormForFind extends Model
         ];
     }
 
-    public function getUsersWithParameters()
+    public function getUsersWithParameters($offset)
     {
         $currentUserId = Yii::$app->user->getId();
         $currentUser = UserTinder::findOne(['id_user'=> $currentUserId]);
@@ -37,7 +37,9 @@ class UserListFormForFind extends Model
                 ['between', 'birthday', date('Y-m-d', strtotime("-{$maxAge} years")), date('Y-m-d', strtotime("-{$minAge} years"))],
                 ['gender' => $oppositeGender],
                 ['not', ['id_user' => $currentUser->id_user]],
-            ])->all();
+            ])->limit(Yii::$app->params['defaultLimit'])
+            ->offset($offset)
+            ->all();
     }
 
     public function serialize()

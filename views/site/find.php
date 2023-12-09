@@ -19,7 +19,7 @@ if (!empty($users)) {
     $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
     $photoPath = $modelPhoto->getImageUrl();
     ?>
-    <div class="card">
+    <div class="card" id="user-card">
         <div class="card__block">
             <div class="photo">
                 <canvas class="photo__user" id="photo-user" data-photo-path="<?= $photoPath ?>"></canvas>
@@ -27,8 +27,6 @@ if (!empty($users)) {
             <div class="card__block-info">
                 <span class="card__block-info-text"><?= Html::encode($currentUser['first_name']) ?>, <?= $currentUser['age'] ?></span>
             </div>
-            <?php $form = ActiveForm::begin(['action' => ['find/redirect']] ); ?>
-            <input type="hidden" name="users" value="<?= htmlspecialchars(stripslashes(json_encode($users))) ?>">
             <div class="card__block-reaction">
                 <button type="submit" class="dislike-button" style="background: none; border: none;">
                     <img src="images/dislike.png" width="85px" height="85px" style="margin-left: 10%">
@@ -37,13 +35,13 @@ if (!empty($users)) {
                     <img src="images/like.png" width="85px" height="85px" style="margin-right: 10%">
                 </button>
             </div>
-            <?php ActiveForm::end(); ?>
             <div style="margin-bottom: 5%"></div>
         </div>
     </div>
 <?php } else { ?>
     <p class ="text-users-end">По вашим параметрам пользователей больше нет.</p>
 <?php } ?>
+
 
 
 
