@@ -12,18 +12,21 @@ use yii\web\IdentityInterface;
  * @property integer $id_match
  * @property integer $id_user_1
  * @property integer $id_user_2
- * @property integer $status
+ * @property integer $state
+ * @property integer $first
  */
 
 class Match extends ActiveRecord implements IdentityInterface
 {
+
 
     public function rules()
     {
         return [
             ['id_user_1', 'required'],
             ['id_user_2', 'required'],
-            ['status', 'required']
+            ['state', 'required'],
+            ['first', 'required' ]
         ];
     }
 

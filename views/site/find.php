@@ -1,7 +1,7 @@
 <?php
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-/** @var array $users */
+/** @var array $user */
 
 use yii\bootstrap5\Html;
 use yii\jui\DatePicker;
@@ -13,9 +13,8 @@ FindScreenAsset::register($this);
 
 $this->title = 'Find';
 
-if (!empty($users)) {
-    $currentUser = array_pop($users); // Получаем первого пользователя
-    $photoId = $currentUser['photoId'];
+if (!empty($user)) {
+    $photoId = $user['photoId'];
     $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
     $photoPath = $modelPhoto->getImageUrl();
     ?>
@@ -25,7 +24,7 @@ if (!empty($users)) {
                 <canvas class="photo__user" id="photo-user" data-photo-path="<?= $photoPath ?>"></canvas>
             </div>
             <div class="card__block-info">
-                <span class="card__block-info-text"><?= Html::encode($currentUser['first_name']) ?>, <?= $currentUser['age'] ?></span>
+                <span class="card__block-info-text"><?= Html::encode($user['first_name']) ?>, <?= $user['age'] ?></span>
             </div>
             <div class="card__block-reaction">
                 <button type="submit" class="dislike-button" style="background: none; border: none;">

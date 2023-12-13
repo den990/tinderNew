@@ -10,6 +10,7 @@ class UserListFormForFind extends Model
     public $first_name;
     public $age;
     public $photo;
+    public int $id_user;
 
     public $users;
 
@@ -24,7 +25,7 @@ class UserListFormForFind extends Model
 
     public function getUsersWithParameters($offset)
     {
-        $currentUserId = Yii::$app->user->getId();
+        $currentUserId = Yii::$app->user->id;
         $currentUser = UserTinder::findOne(['id_user'=> $currentUserId]);
 
         $oppositeGender = ($currentUser->gender != 0) ? 1 : 0; // пока однополые стоят
@@ -42,6 +43,7 @@ class UserListFormForFind extends Model
             ->all();
     }
 
+
     public function serialize()
     {
         $result = [];
@@ -49,7 +51,7 @@ class UserListFormForFind extends Model
         foreach($this->users as $user)
         {
             $model = new UserTinder($user);
-            $result[] = $model->serializeForFind();//TODO пока хуй знает будет работать или нет
+            $result[] = $model->serializeForFind();
         }
 
         return $result;

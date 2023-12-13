@@ -221,7 +221,16 @@ class SiteController extends Controller
         {
             $modelUserListForm = new UserListFormForFind();
             $modelUserListForm->users = $modelUserListForm->getUsersWithParameters(0);
-            return $this->render('find', ['users' => $modelUserListForm->serialize()]);
+            $modelUserListForm->users = $modelUserListForm->serialize();
+            $user = array_shift($modelUserListForm->users);
+
+            Yii::$app->session->set('userListForm', $modelUserListForm->users);
+            Yii::$app->session->set('limitCount', Yii::$app->params['defaultLimit']);
+            Yii::$app->session->set('count', 1);
+            Yii::$app->session->set('previousUser', $user);
+
+            return $this->render('find', ['user' => $user]);
+//            return $this->redirect(['test/print', 'user' => $modelUserListForm->users]);
         }
     }
 }

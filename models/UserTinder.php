@@ -107,6 +107,7 @@ class UserTinder extends ActiveRecord implements IdentityInterface
             'first_name' => $this->first_name,
             'age' => $this->getAge(),
             'photoId' => $this->photo,
+            'id_user' => $this->getId(),
         ];
     }
 }

@@ -36,11 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function() {
     // Функция для обновления профиля пользователя
-    function updateUserProfile() {
+    function updateUserProfile(reaction) {
         $.ajax({
             url: '/find/update-profile', // Путь к вашему обработчику на сервере
             type: 'POST',
             dataType: 'json',
+            data: {reaction: reaction},
             success: function(data) {
                 if (data && 'hasMoreProfiles' in data && 'profileHtml' in data) {
                     if (data.hasMoreProfiles) {
@@ -64,12 +65,12 @@ $(document).ready(function() {
 
     // Обработчик для кнопки лайка
     $(document).on('click', '.like-button', function() {
-        updateUserProfile();
+        updateUserProfile('like');
     });
 
     // Обработчик для кнопки дизлайка
     $(document).on('click', '.dislike-button', function() {
-        updateUserProfile();
+        updateUserProfile('dislike');
     });
 });
 
