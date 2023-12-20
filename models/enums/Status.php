@@ -10,9 +10,11 @@ class Status extends BaseEnum
     const ACCEPT = 1;
     const CANCELED = 2;
     const IN_WAITING = 3;
+    const UNDEFINED = 4;
     public static $state = [
         'Accept' => 0,
         'Canceled' => 1,
         'In Waitind' => 2,
+        'Undefined' => 3
     ];
 }

@@ -12,8 +12,8 @@ use yii\web\IdentityInterface;
  * @property integer $id_match
  * @property integer $id_user_1
  * @property integer $id_user_2
- * @property integer $state
- * @property integer $first
+ * @property integer $state_1
+ * @property integer $state_2
  */
 
 class Match extends ActiveRecord implements IdentityInterface
@@ -25,8 +25,8 @@ class Match extends ActiveRecord implements IdentityInterface
         return [
             ['id_user_1', 'required'],
             ['id_user_2', 'required'],
-            ['state', 'required'],
-            ['first', 'required' ]
+            ['state_1', 'required'],
+            ['state_2', 'required' ]
         ];
     }
 

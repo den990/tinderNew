@@ -2,7 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\enums\Status;
+use app\models\Like;
+use app\models\Match;
 use app\models\UserListFormForFind;
+use app\models\UserListFormForMessage;
+use app\models\UserListFormForNotification;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -79,6 +84,22 @@ class SiteController extends Controller
 //            // Сохранить пользователя в базу данных
 //            $user->save();
 //        }
+//        for ($i = 2; $i <= 13; $i++) {
+//            $user = new Like();
+//            $user->id_user_1 = $i;
+//            $user->id_user_2 = 1;
+//            $user->date = date('Y-m-d H:i:s', strtotime('now'));
+//
+//            // Сохранить пользователя в базу данных
+//            $user->save();
+//            sleep(2);
+//        }
+//        $modelMatch = new Match();
+//        $modelMatch->id_user_1 = 1;
+//        $modelMatch->id_user_2 = 3;
+//        $modelMatch->first = 1;
+//        $modelMatch->state = Status::ACCEPT;
+//        $modelMatch->save();
 //        Yii::$app->session->remove('userListForm');
 //        Yii::$app->session->remove('limitCount');
 //        Yii::$app->session->remove('count');
@@ -193,7 +214,10 @@ class SiteController extends Controller
         }
         else
         {
-            return $this->render('message');
+            $modelUserListForm = new UserListFormForMessage();
+            $modelUserListForm->users = $modelUserListForm->getUsersWithParameters(0);
+            $modelUserListForm->users = $modelUserListForm->serialize();
+            return $this->render('message', ['users' => $modelUserListForm->users]);
         }
     }
 
@@ -206,7 +230,9 @@ class SiteController extends Controller
         }
         else
         {
-            return $this->render('notification');
+            $modelUserListForm = new UserListFormForNotification();
+            $modelUserListForm->users = $modelUserListForm->getUsersWithParameters();
+            return $this->render('notification', ['users' => $modelUserListForm->users]);
         }
     }
 
@@ -223,14 +249,20 @@ class SiteController extends Controller
             $modelUserListForm->users = $modelUserListForm->getUsersWithParameters(0);
             $modelUserListForm->users = $modelUserListForm->serialize();
             $user = array_shift($modelUserListForm->users);
+            if ($user) {
 
-            Yii::$app->session->set('userListForm', $modelUserListForm->users);
-            Yii::$app->session->set('limitCount', Yii::$app->params['defaultLimit']);
-            Yii::$app->session->set('count', 1);
-            Yii::$app->session->set('previousUser', $user);
+                Yii::$app->session->set('userListForm', $modelUserListForm->users);
+                Yii::$app->session->set('limitCount', Yii::$app->params['defaultLimit']);
+                Yii::$app->session->set('count', 1);
+                Yii::$app->session->set('previousUser', $user);
 
-            return $this->render('find', ['user' => $user]);
+                return $this->render('find', ['user' => $user]);
 //            return $this->redirect(['test/print', 'user' => $modelUserListForm->users]);
+            }
+            else
+            {
+                return $this->goHome();
+            }
         }
     }
 }

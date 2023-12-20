@@ -19,7 +19,7 @@ class m231130_192711_create_like_table extends Migration
             'id_like' => $this->primaryKey(),
             'id_user_1' => $this->integer(),
             'id_user_2' => $this->integer(),
-            'date' => $this->date()->notNull(),
+            'date' => $this->dateTime()->notNull(),
         ], $tableOptions);
 
         // Добавьте внешний ключ

@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
+use app\models\Chat;
 use app\models\enums\Status;
+use app\models\Like;
 use app\models\Match;
 use app\models\UserListFormForFind;
 use yii\base\NotSupportedException;
@@ -30,7 +32,6 @@ class FindController extends Controller
     {
         $hasMoreProfiles = false;
         $profileHtml = '';
-
         {
             $userListForm = new UserListFormForFind();
             $userListForm->users = $userListForm->getUsersWithParameters(1);
@@ -101,9 +102,9 @@ class FindController extends Controller
 
         $findMatch = Match::findOne(['id_user_1' => $copyUserId1, 'id_user_2' => $copyUserId2]);
         if ($reaction == 'like') {
-            if ($findMatch == null) {
+            if ($findMatch == null) {  // если нет такой записи
                 $modelMatch = new Match();
-                if ($edit)
+                if ($edit)//это переменная чтобы у нас записывался сначала меньший айди в 1
                 {
                     $modelMatch->id_user_1 = $userId2;
                     $modelMatch->id_user_2 = $userId1;
@@ -112,17 +113,63 @@ class FindController extends Controller
                     $modelMatch->id_user_1 = $userId1;
                     $modelMatch->id_user_2 = $userId2;
                 }
-                $modelMatch->state = Status::IN_WAITING;
-                $modelMatch->first = $userId1;
+                $modelMatch->state_1 = Status::IN_WAITING;
+                $modelMatch->state_2 = Status::UNDEFINED;
                 if (!$modelMatch->save()) {
                     Yii::error("Error saving Match model: " . print_r($modelMatch->errors, true), 'app\controllers\FindController');
                 }
 
+                $likeModel = new Like();
+                $likeModel->id_user_1 = $userId1;
+                $likeModel->id_user_2 = $userId2;
+                $likeModel->date = date('Y-m-d H:i:s', strtotime('now'));
+
+                if (!$likeModel->save()) {
+                    Yii::error("Error saving Match model: " . print_r($likeModel->errors, true), 'app\controllers\FindController');
+                }
+
             } else {
-                if ($findMatch->first != $userId1) {
-                    $findMatch->state = Status::ACCEPT;
-                } else {
-                    $findMatch->state = Status::IN_WAITING;
+                if ($edit)
+                {
+                    $findMatch->state_2 = Status::IN_WAITING;
+                }
+                else
+                {
+                    $findMatch->state_1 = Status::IN_WAITING;
+                }
+                if ($findMatch->state_1 == Status::IN_WAITING && $findMatch->state_2 == Status::IN_WAITING) // если друг другу нравятся
+                {
+                    //создаем чат
+                    $findChat = Chat::findOne(['id_user_1' => $findMatch->id_user_1, 'id_user_2' => $findMatch->id_user_2]);
+                    if ($findChat == null) {
+                        $modelChat = new Chat();
+                        $modelChat->id_user_1 = $findMatch->id_user_1; // чтобы сразу было сначало меньший айди
+                        $modelChat->id_user_2 = $findMatch->id_user_2;
+                        $modelChat->date = date('Y-m-d H:i:s', strtotime('now'));
+                        if (!$modelChat->save()) {
+                            Yii::error("Error saving Match model: " . print_r($modelChat->errors, true), 'app\controllers\FindController');
+                        }
+                    }
+
+                    //лайк, нужно будет сделать обработку на существующий
+                    $findLike = Like::findOne(['id_user_1' => $userId1, 'id_user_2' => $userId2]);
+                    if ($findLike == null) {
+                        $likeModel = new Like();
+                        $likeModel->id_user_1 = $userId1;
+                        $likeModel->id_user_2 = $userId2;
+                        $likeModel->date = date('Y-m-d H:i:s', strtotime('now'));
+                        if (!$likeModel->save()) {
+                            Yii::error("Error saving Match model: " . print_r($likeModel->errors, true), 'app\controllers\FindController');
+                        }
+                    }
+                    else // обновляем дату
+                    {
+                        $findLike->date = date('Y-m-d H:i:s', strtotime('now'));
+                        if (!$findLike->save()) {
+                            Yii::error("Error saving Match model: " . print_r($findLike->errors, true), 'app\controllers\FindController');
+                        }
+                    }
+
                 }
                 $findMatch->save();
 
@@ -137,15 +184,27 @@ class FindController extends Controller
                 }
                 else {
                     $modelMatch->id_user_1 = $userId1;
-                    $modelMatch->id_user_2 = $userId2;//короче если у нас ид 16 и доходи до 15 какого хрена записывает 16 16
+                    $modelMatch->id_user_2 = $userId2;
                 }
-                $modelMatch->state = Status::CANCELED;
-                $modelMatch->first = $userId1;
-                $modelMatch->save();
+                $modelMatch->state_1 = Status::CANCELED;
+                $modelMatch->state_2 = Status::UNDEFINED;
+                if (!$modelMatch->save()) {
+                    Yii::error("Error saving Match model: " . print_r($modelMatch->errors, true), 'app\controllers\FindController');
+                }
 
             } else {
-                $findMatch->state = Status::CANCELED;
+                if ($edit)
+                {
+                    $findMatch->state_2 = Status::CANCELED;
+                }
+                else
+                {
+                    $findMatch->state_1 = Status::CANCELED;
+                }
                 $findMatch->save();
+                if (!$findMatch->save()) {
+                    Yii::error("Error saving Match model: " . print_r($findMatch->errors, true), 'app\controllers\FindController');
+                }
             }
         }
 
