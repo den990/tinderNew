@@ -7,7 +7,10 @@ function setHeight () {
     document.querySelector(".block__message-window").style.height = sixtyPercentHeight + "px";
     document.querySelector(".block__message-window-chat").style.height = 100 + "%";
     var svgElement = document.getElementById("mySvg");
-    svgElement.querySelector("path").setAttribute("d", `M1 0V${sixtyPercentHeight}`);
+    var chatElement = document.querySelector(".block__message-window-chat");
+    var visibleHeight = chatElement.scrollHeight;
+    svgElement.setAttribute("height", visibleHeight); // Изменено
+    svgElement.querySelector("path").setAttribute("d", `M1 0V${visibleHeight}`);
 }
 
 window.onload = function ()

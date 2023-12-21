@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Chat;
 use app\models\enums\Status;
 use app\models\Like;
 use app\models\Match;
@@ -94,6 +95,11 @@ class SiteController extends Controller
 //            $user->save();
 //            sleep(2);
 //        }
+//        $chat = new Chat();
+//        $chat->id_user_1 = 1;
+//        $chat->id_user_2 = 4;
+//        $chat->date = date('Y-m-d H:i:s', strtotime('now'));
+//        $chat->save();
 //        $modelMatch = new Match();
 //        $modelMatch->id_user_1 = 1;
 //        $modelMatch->id_user_2 = 3;

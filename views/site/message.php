@@ -34,8 +34,9 @@ $this->title = 'Message';
                     $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
                     $photoPath = $modelPhoto->getImageUrl();
                     $photoPath = Url::to($photoPath, true);
+                    $dialogId = 'dialog_' . $user['id_user'];
                     ?>
-                    <div class="block__message-window-chat-user">
+                    <div class="block__message-window-chat-user" id="<?= $dialogId ?>">
                         <img src="<?= $photoPath ?>" class="block__message-window-chat-user-photo" width="80px"
                              height="80px">
                         <div class="block__message-window-chat-user-info">
@@ -56,3 +57,25 @@ $this->title = 'Message';
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var chatContainer = document.querySelector('.block__message-window-chat');
+
+        chatContainer.addEventListener('click', function (event) {
+            var clickedElement = event.target.closest('.block__message-window-chat-user');
+
+            if (!clickedElement) {
+                return;
+            }
+
+            // Удаляем класс active-dialog у всех диалогов
+            chatContainer.querySelectorAll('.block__message-window-chat-user').forEach(function (el) {
+                el.classList.remove('active');
+            });
+
+            // Добавляем класс active-dialog только кликнутому диалогу
+            clickedElement.classList.add('active');
+        });
+    });
+</script>

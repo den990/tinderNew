@@ -50,6 +50,7 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    overflow-y: auto;
 }
 .block__message-window-chat-users
 {
@@ -57,15 +58,23 @@
     display: flex;
     flex-direction: column;
 }
+
+
 .block__message-window-chat-user
 {
     display: flex;
     flex-direction: row;
-    margin-left: 9%;
+    padding-left: 9%;
     align-items: center;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
+
+.block__message-window-chat-user.active
+{
+    background-color: #0CE46333;
+}
+
 .block__message-window-chat-user-photo
 {
     border-radius: 50%;
