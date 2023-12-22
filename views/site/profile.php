@@ -62,6 +62,9 @@ $this->title = "Profile";
             <div>
             <?= Html::submitButton('Сохранить', ['class' => 'profile-editing__fields__photo-button-block__submit-button']) ?>
             </div>
+            <div>
+                <?= Html::submitButton('Выйти', ['class' => 'profile-editing__fields__photo-button-block__exit-button']) ?>
+            </div>
         </div>
     </div>
 
