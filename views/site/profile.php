@@ -6,6 +6,7 @@
 /** @var app\models\UserTinderUpdate $model */
 
 use yii\bootstrap5\Html;
+use yii\helpers\Url;
 use yii\jui\DatePicker;
 use yii\bootstrap5\ActiveForm;
 use app\assets\ProfileScreenAsset;
@@ -63,7 +64,10 @@ $this->title = "Profile";
             <?= Html::submitButton('Сохранить', ['class' => 'profile-editing__fields__photo-button-block__submit-button']) ?>
             </div>
             <div>
-                <?= Html::submitButton('Выйти', ['class' => 'profile-editing__fields__photo-button-block__exit-button']) ?>
+                <?= Html::button('Выйти', [
+                    'class' => 'profile-editing__fields__photo-button-block__exit-button',
+                    'onclick' => 'exit()',
+                ]) ?>
             </div>
         </div>
     </div>

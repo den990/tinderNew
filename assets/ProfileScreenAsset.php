@@ -15,5 +15,6 @@ class ProfileScreenAsset extends AssetBundle
 
     public $js = [
         'js/handle_updatePhoto.js',
+        'js/profile_exit.js',
     ];
 }

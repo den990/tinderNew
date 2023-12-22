@@ -20,7 +20,6 @@ class UpdateController extends Controller
         $cities = array_keys(Cities::$codeToValue);
         $existingId = Yii::$app->user->getId();
         $existingUserTinder = UserTinder::find()->where(['id_user' => $existingId])->one();
-        var_dump($existingUserTinder->email . '<br>');
         $modelTinderUser = new UserTinderUpdate();
         if (Yii::$app->request->isPost) {
             $postData = Yii::$app->request->post();
