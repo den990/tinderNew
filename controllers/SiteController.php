@@ -271,4 +271,9 @@ class SiteController extends Controller
             }
         }
     }
+
+    public function actionOtherProfile()
+    {
+        return $this->render('profile-other');
+    }
 }

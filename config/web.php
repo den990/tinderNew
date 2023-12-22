@@ -58,6 +58,7 @@ $config = [
                 'notification' => 'site/notification',
                 'find' => 'site/find',
                 'finding' => 'find/redirect',
+                'other-profile' => 'site/other-profile'
             ],
         ],
 
