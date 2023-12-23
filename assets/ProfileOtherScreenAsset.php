@@ -14,5 +14,6 @@ class ProfileOtherScreenAsset extends AssetBundle
     ];
 
     public $js = [
+        'js/block_handler.js'
     ];
 }

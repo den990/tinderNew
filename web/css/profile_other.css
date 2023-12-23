@@ -215,4 +215,15 @@ template {
         padding: 10px 20px;
         margin-top: 30px;
     }
+    .other-profile-unblock__additional-info__button
+    {
+        font: 600 16px/1.22 "Montserrat";
+        color: white;
+        border-radius: 20px;
+        background: linear-gradient(104deg, #0CE463 21.88%, #60D009 81.29%);
+        border: none;
+        max-width: 300px;
+        padding: 10px 20px;
+        margin-top: 30px;
+    }
 }

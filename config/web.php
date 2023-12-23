@@ -11,6 +11,9 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'controllerMap' => [
+        'profileOther' => 'app\controllers\ProfileOtherController',
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -52,13 +55,14 @@ $config = [
                 'index' => 'site/index',
                 'registration' => 'site/registration',
                 'login' => 'site/login',
-                'profile' => 'site/profile',
-                'profile' => 'update/update',
+                'my-profile' => 'site/profile',
+                'my-profiles' => 'update/update',
                 'message' => 'site/message',
                 'notification' => 'site/notification',
                 'find' => 'site/find',
                 'finding' => 'find/redirect',
-                'other-profile' => 'site/other-profile'
+                'other-profile' => 'site/other-profile',
+                'GET profile/other' => 'profileOther/other'
             ],
         ],
 

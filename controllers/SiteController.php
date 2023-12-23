@@ -202,7 +202,6 @@ class SiteController extends Controller
         {
             $userId = Yii::$app->user->getId();
             $model = UserTinderUpdate::find()->where(['id_user' => $userId])->one();
-            //gender не совсем правильно отображается
             $cities = array_keys(Cities::$codeToValue);
             return $this->render('profile', [
                 'model' => $model,

@@ -1,4 +1,5 @@
 function cropImage(imageElement, topPercentage, bottomPercentage) {
+
     var canvas = document.querySelector(".photo__user");
     var ctx = canvas.getContext("2d");
 
