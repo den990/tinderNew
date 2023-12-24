@@ -28,22 +28,22 @@
             <div class="card__block-info">
                 <div>
                     <span class="card__block-info__name-text"><?= Html::encode($user['first_name']) ?></span>
-                    <span class="card__block-info__age-text">, Возраст</span>
+                    <span class="card__block-info__age-text">, <?= $user['age'] ?></span>
                 </div>
                 <div class="card__block-info__add-info__city">
                     <img src="../images/icon_house.svg" width="35">
-                    <span class="card__block-info__city__text">Живёт в: Город</span>
+                    <span class="card__block-info__city__text">Живёт в: <?= $user['location'] ?></span>
                 </div>
                 <div class="card__block-info__add-info__sex">
                     <img src="../images/icon_profile.svg" width="25">
-                    <span class="card__block-info__sex__text">Пол</span>
+                    <span class="card__block-info__sex__text">Пол: <?= $user['gender'] ?></span>
                 </div>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="4" viewBox="0 0 100% 4" fill="none">
                 <path d="M0 2H3000" stroke="#272C28" stroke-width="3"/>
             </svg>
             <div class="card__block__additional-info">
-                <span class="card__block__additional-info__text">Бродяга</span>
+                <span class="card__block__additional-info__text"><?= $user['description'] ?></span>
             </div>
             <div class="card__block-reaction">
                 <button type="submit" class="dislike-button" style="background: none; border: none;">

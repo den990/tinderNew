@@ -12,6 +12,8 @@ use yii\helpers\Url;
 use yii\jui\DatePicker;
 use yii\bootstrap5\ActiveForm;
 use app\assets\MessageScreenAsset;
+use app\models\UserTinder;
+
 
 MessageScreenAsset::register($this);
 
@@ -36,7 +38,7 @@ $this->title = 'Message';
                     $photoPath = Url::to($photoPath, true);
                     $dialogId = 'dialog_' . $user['id_user'];
                     ?>
-                    <div class="block__message-window-chat-user" id="<?= $dialogId ?>">
+                    <div class="block__message-window-chat-user" id="<?= $dialogId ?>" data-user-id="<?= $user['id_user'] ?>">
                         <img src="<?= $photoPath ?>" class="block__message-window-chat-user-photo" width="80px"
                              height="80px">
                         <div class="block__message-window-chat-user-info">
@@ -53,11 +55,11 @@ $this->title = 'Message';
             <svg id="mySvg" xmlns="http://www.w3.org/2000/svg" width="2" height="100%" viewBox="0 0 2 100%" fill="none">
                 <path d="M1 0V200" stroke="#272C28" stroke-width="2"/>
             </svg>
-            <!--<div class="block__message-window__chat-message">
+            <div class="block__message-window__chat-message">
                 <image src="images/icon_messageChat.svg" >
                 <span class="block__message-window__chat-message__text">Выберите чат</span>
-            </div>-->
-            <div class="block__message-window__chat">
+            </div>
+            <div class="block__message-window__chat" style="display: none;">
                 <div class="block__message-window__chat__user-info">
                     <span class="block__message-window__chat__user-info__name">Даниил Колдырев</span>
                     <span class="block__message-window__chat__user-info__date">Был(а) 4 часа назад</span>
@@ -79,13 +81,52 @@ $this->title = 'Message';
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var chatContainer = document.querySelector('.block__message-window-chat');
+        var defaultChatBlock = document.querySelector('.block__message-window__chat-message');
+        var activeChatBlock = document.querySelector('.block__message-window__chat');
 
         chatContainer.addEventListener('click', function (event) {
             var clickedElement = event.target.closest('.block__message-window-chat-user');
 
-            if (!clickedElement) {
-                return;
-            }
+            var userId = clickedElement.getAttribute('data-user-id');
+            var csrfToken = $('meta[name=csrf-token]').attr('content');
+            $.ajax({
+                url: 'profile-other/show', // Укажите путь к вашему PHP-скрипту
+                method: 'POST',
+                data: {userId: userId, _csrf: csrfToken},
+                success: function (response) {
+                    console.log(response);
+
+                    var userInfoName = document.querySelector('.block__message-window__chat__user-info__name');
+                    //это хуйня если будем вводить когда пользователь в сети был
+                    // var userInfoLastSeen = document.querySelector('.block__message-window__chat__user-info__date');
+
+                    var userLink = document.createElement('a');
+                    userLink.style.color = 'inherit';
+                    userLink.style.textDecoration = 'none';
+
+                    userLink.href = response.link;
+                    userLink.innerText = response.userName;
+
+                    var sendIcon = document.querySelector('.block__message-window__chat__messaging__icon');
+
+                    if (response.block) {
+                        sendIcon.setAttribute('src', 'images/icon_send_error.svg');
+                    } else {
+                        sendIcon.setAttribute('src', 'images/icon_send.svg');
+                    }
+
+                    userInfoName.innerHTML = '';
+                    userInfoName.appendChild(userLink);
+
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+
+            defaultChatBlock.style.display = 'none';
+            activeChatBlock.style.display = 'block';
 
             // Удаляем класс active-dialog у всех диалогов
             chatContainer.querySelectorAll('.block__message-window-chat-user').forEach(function (el) {

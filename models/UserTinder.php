@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\models\enums\Cities;
 use DateTime;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -101,6 +102,18 @@ class UserTinder extends ActiveRecord implements IdentityInterface
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
 
+    public function getGender()
+    {
+        if ($this->gender == 0)
+        {
+            return 'Мужской';
+        }
+        else
+        {
+            return 'Женский';
+        }
+    }
+
     public function serializeForFind()
     {
         return [
@@ -108,6 +121,9 @@ class UserTinder extends ActiveRecord implements IdentityInterface
             'age' => $this->getAge(),
             'photoId' => $this->photo,
             'id_user' => $this->getId(),
+            'location' => Cities::$numberToCity[$this->location],
+            'gender' => $this->getGender(),
+            'description' => $this->description
         ];
     }
 
