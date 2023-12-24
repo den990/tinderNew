@@ -103,3 +103,58 @@
     font: 600 16px/1.22 'Montserrat';
     color: rgba(130, 130, 130, 1);
 }
+
+.block__message-window__chat
+{
+
+}
+
+.block__message-window__chat__user-info
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.block__message-window__chat__user-info__name
+{
+    font: 500 16px/1.22 'Montserrat';
+    color: white;
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.block__message-window__chat__user-info__date
+{
+    font: 500 12px/1.22 'Montserrat';
+    color: rgba(155, 155, 155, 1);
+    padding-left: 30px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.block__message-window__chat__messages
+{
+    background-color: rgba(26, 26, 24, 1);
+    width: 813px;
+    height: 350px;
+}
+
+.block__message-window__chat__messaging
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.block__message-window__chat__messaging__text
+{
+    color: rgba(155, 155, 155, 1);
+    font: 500 12px/1.22 'Montserrat';
+    padding-left: 30px;
+    padding-top: 20px;
+}
+
+.block__message-window__chat__messaging__icon
+{
+    padding-right: 15px;
+    padding-top: 15px;
+}
