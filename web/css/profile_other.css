@@ -149,13 +149,20 @@ template {
     .other-profile-block__main-info-with-picture
     {
         height: 230px;
+        display: flex;
+        flex-direction: row;
     }
     .other-profile-block__main-info
     {
         display: flex;
         flex-direction: column;
-        padding-left: 330px;
         padding-top: 50px;
+        padding-left: 50px;
+    }
+    .user-photo__container
+    {
+        padding-top: 20px;
+        padding-left: 100px;
     }
     .other-profile-block__main-info__name-birthday__name
     {
@@ -172,6 +179,10 @@ template {
     {
         display: flex;
         padding-top: 15px;
+    }
+    .other-profile-block__main-info__sex-with-icon__icon
+    {
+        padding-left: 5px;
     }
     .other-profile-block__main-info__sex
     {
@@ -225,5 +236,10 @@ template {
         max-width: 300px;
         padding: 10px 20px;
         margin-top: 30px;
+    }
+    .no-user
+    {
+        color: white;
+        font: 600 30px/1.22 'Montserrat';
     }
 }

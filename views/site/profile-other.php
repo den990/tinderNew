@@ -25,19 +25,23 @@ $user = UserTinder::findOne(['id_user' => $userId]);
 <?php if ($user): ?>
 <div class="other-profile-block">
     <div class="other-profile-block__main-info-with-picture">
-        <?php
-        $photoId = $user->getPhotoId();
-        $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
-        $photoPath = $modelPhoto->getImageUrl();
-        ?>
-        <?= Html::img($photoPath, ['class' => 'user-photo', 'alt' => 'User Photo', 'width' => '75px', 'height' => '75px']) ?>
+        <div>
+            <div class="user-photo__container">
+                <?php
+                $photoId = $user->getPhotoId();
+                $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
+                $photoPath = $modelPhoto->getImageUrl();
+                ?>
+                <?= Html::img($photoPath, ['class' => 'user-photo', 'alt' => 'User Photo', 'width' => '200px', 'height' => '200px']) ?>
+            </div>
+        </div>
         <div class="other-profile-block__main-info">
             <div class="other-profile-block__main-info__name-birthday">
                 <span class="other-profile-block__main-info__name-birthday__name"> <?= $user['first_name'] ?>  <?= $user['last_name'] ?></span>
                 <span class="other-profile-block__main-info__name-birthday__birthday"><?= $user['age'] ?> лет</span>
             </div>
             <div class="other-profile-block__main-info__sex-with-icon">
-                <img src="../images/icon_profile.svg" width="25">
+                <img class="other-profile-block__main-info__sex-with-icon__icon" src="../images/icon_profile.svg" width="25">
                 <span class="other-profile-block__main-info__sex">
                     <?php if ($user['gender'] == 0): ?>
                         Мужской
@@ -71,7 +75,7 @@ $user = UserTinder::findOne(['id_user' => $userId]);
     </div>
 </div>
 <?php else: ?>
-<div>Пользователя нет</div>
+<div class="no-user">Пользователя не существует</div>
 <?php endif; ?>
 
 
