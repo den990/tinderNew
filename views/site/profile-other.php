@@ -15,11 +15,11 @@ use app\models\UserTinder;
 use app\models\enums\Cities;
 use app\models\Block;
 
+
 ProfileOtherScreenAsset::register($this);
 
 $this->title = 'Profile';
 $user = UserTinder::findOne(['id_user' => $userId]);
-
 ?>
 
 <?php if ($user): ?>
@@ -67,10 +67,12 @@ $user = UserTinder::findOne(['id_user' => $userId]);
         <p class="other-profile-block__additional-info__text"><?= $user['description'] ?></p>
         <?php
         $modelBlock = Block::findOne(['id_user_blocker' => Yii::$app->user->getId(), 'id_user_blocked' => $user['id_user']]);
-        if ($modelBlock): ?>
-            <?= Html::Button('Разблокировать', ['class' => 'other-profile-unblock__additional-info__button', 'id' => 'unblockButton', 'data-user-id' => $userId,]) ?>
-        <?php else: ?>
-            <?= Html::Button('Заблокировать', ['class' => 'other-profile-block__additional-info__button', 'id' => 'blockButton', 'data-user-id' => $userId,]) ?>
+        if ($userId  != Yii::$app->user->getId()):
+            if ($modelBlock): ?>
+                <?= Html::Button('Разблокировать', ['class' => 'other-profile-unblock__additional-info__button', 'id' => 'unblockButton', 'data-user-id' => $userId,]) ?>
+            <?php else: ?>
+                <?= Html::Button('Заблокировать', ['class' => 'other-profile-block__additional-info__button', 'id' => 'blockButton', 'data-user-id' => $userId,]) ?>
+            <?php endif; ?>
         <?php endif; ?>
     </div>
 </div>

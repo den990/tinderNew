@@ -275,4 +275,9 @@ class SiteController extends Controller
     {
         return $this->render('profile-other');
     }
+
+    public function actionTest()
+    {
+        return $this->render('test');
+    }
 }

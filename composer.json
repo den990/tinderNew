@@ -21,6 +21,9 @@
         "yii2mod/yii2-enum": "^1.7",
         "bower-asset/jquery": "^3.7",
         "yiisoft/yii2-jui": "^2.0",
+        "consik/yii2-websocket": "^1.0",
+        "ext-json": "*",
+        "cboden/ratchet": "^0.3.6"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

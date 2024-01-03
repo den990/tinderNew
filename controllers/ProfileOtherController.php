@@ -3,6 +3,8 @@
 namespace app\controllers;
 
 use app\models\Block;
+use app\models\Chat;
+use app\models\Message;
 use app\models\UserTinder;
 use yii\web\Controller;
 use Yii;
@@ -38,6 +40,28 @@ class ProfileOtherController extends Controller
             'link' => 'profile/other?' . 'userId='. $user['id_user'],
             'block' => $block
 
+        ];
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $response;
+    }
+
+    public function actionDialog()
+    {
+        $userId = Yii::$app->request->post('userId');
+        $currentUserId = Yii::$app->user->getId();
+
+        $chat = null;
+        if ($userId > $currentUserId) {
+            $chat = Chat::findOne(['id_user_1' => $currentUserId, 'id_user_2' => $userId]);
+            }
+        else
+        {
+            $chat = Chat::findOne(['id_user_1' => $userId, 'id_user_2' => $currentUserId]);
+        }
+
+        $response = [
+            'dialog' => $chat->id_chat,
+            'userId' => $userId
         ];
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $response;

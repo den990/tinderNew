@@ -12,6 +12,7 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
     ],
     'controllerMap' => [
+        'chat-websocket' => 'app\controllers\ChatWebSocketController',
         'profileOther' => 'app\controllers\ProfileOtherController',
     ],
     'components' => [

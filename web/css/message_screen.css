@@ -42,13 +42,14 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    overflow-y: auto;
+
 }
 .block__message-window-chat-users
 {
     width: 35%;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 
@@ -138,6 +139,19 @@
     background-color: rgba(26, 26, 24, 1);
     width: 813px;
     height: 350px;
+    display: flex;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+}
+
+.block__message-window__chat__messages-user1
+{
+    color : white;
+}
+
+.block__message-window__chat__messages-user2
+{
+    color:white;
 }
 
 .block__message-window__chat__messaging
@@ -158,4 +172,20 @@
 {
     padding-right: 15px;
     padding-top: 15px;
+    border: none;
+    background: inherit;
+}
+
+.block__message-window__chat__messaging__input
+{
+    background: inherit;
+    width: 70%;
+    border: none;
+    color: white;
+}
+
+.block__message-window__chat__messaging__button
+{
+    border: none;
+    background: inherit;
 }

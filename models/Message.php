@@ -23,7 +23,6 @@ class Message extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['id_message', 'required'],
             ['id_chat', 'required'],
             ['id_user', 'required'],
             ['text', 'required'],
@@ -33,7 +32,7 @@ class Message extends ActiveRecord implements IdentityInterface
 
     public static function tableName()
     {
-        return '{{%chat}}';
+        return '{{%message}}';
     }
 
     public static function findIdentity($id_message)

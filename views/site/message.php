@@ -13,6 +13,8 @@ use yii\jui\DatePicker;
 use yii\bootstrap5\ActiveForm;
 use app\assets\MessageScreenAsset;
 use app\models\UserTinder;
+use consik\yii2websocket\WebSocketServer;
+use Ratchet\ConnectionInterface;
 
 
 MessageScreenAsset::register($this);
@@ -64,23 +66,32 @@ $this->title = 'Message';
                     <span class="block__message-window__chat__user-info__name">Даниил Колдырев</span>
                     <span class="block__message-window__chat__user-info__date">Был(а) 4 часа назад</span>
                 </div>
-                <div class="block__message-window__chat__messages">
-                    <div>
-
+                <div class="block__message-window__chat__messages" id="chat">
+                    <div class="block__message-window__chat__messages-user1">
+                        Привет1
+                    </div>
+                    <div class="block__message-window__chat__messages-user2">
+                        Привет2
                     </div>
                 </div>
                 <div class="block__message-window__chat__messaging">
-                    <span class="block__message-window__chat__messaging__text">Написать сообщение...</span>
-                    <image class="block__message-window__chat__messaging__icon" src="images/icon_send.svg" >
+                    <input type="text" id="messageInput" class="block__message-window__chat__messaging__input" placeholder="Написать сообщение...">
+                    <button id="sendMessageButton" class="block__message-window__chat__messaging__button">
+                        <img class="block__message-window__chat__messaging__icon" src="images/icon_send.svg" alt="Send">
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
 <script>
+    var csrfToken = $('meta[name=csrf-token]').attr('content');
+    var chatId;
     document.addEventListener('DOMContentLoaded', function () {
-        var chatContainer = document.querySelector('.block__message-window-chat');
+        var chatContainer = document.querySelector('.block__message-window-chat-users');
         var defaultChatBlock = document.querySelector('.block__message-window__chat-message');
         var activeChatBlock = document.querySelector('.block__message-window__chat');
 
@@ -88,7 +99,6 @@ $this->title = 'Message';
             var clickedElement = event.target.closest('.block__message-window-chat-user');
 
             var userId = clickedElement.getAttribute('data-user-id');
-            var csrfToken = $('meta[name=csrf-token]').attr('content');
             $.ajax({
                 url: 'profile-other/show', // Укажите путь к вашему PHP-скрипту
                 method: 'POST',
@@ -115,6 +125,7 @@ $this->title = 'Message';
                         sendIcon.setAttribute('src', 'images/icon_send.svg');
                     }
 
+
                     userInfoName.innerHTML = '';
                     userInfoName.appendChild(userLink);
 
@@ -123,7 +134,17 @@ $this->title = 'Message';
                     console.error(error);
                 }
             });
-
+            var chat = document.querySelector('.block__message-window__chat__messages');
+            $.ajax({
+                url: 'profile-other/dialog', // Укажите путь к вашему PHP-скрипту
+                method: 'POST',
+                data: {userId: userId, _csrf: csrfToken},
+                success: function (response) {
+                    chat.setAttribute('id', 'chat' + response.dialog);
+                    chatId = 'chat' + response.dialog;
+                    console.log(response.dialog);
+                }
+            });
 
             defaultChatBlock.style.display = 'none';
             activeChatBlock.style.display = 'block';
@@ -137,4 +158,67 @@ $this->title = 'Message';
             clickedElement.classList.add('active');
         });
     });
+
+var selectedUserId;
+document.addEventListener("DOMContentLoaded", function () {
+        var chatContainer = document.querySelector('.block__message-window-chat-users');
+        var defaultChatBlock = document.querySelector('.block__message-window__chat-message');
+        var activeChatBlock = document.querySelector('.block__message-window__chat');
+
+        chatContainer.addEventListener('click', function (event) {
+            var clickedElement = event.target.closest('.block__message-window-chat-user');
+            selectedUserId = clickedElement.getAttribute('data-user-id');  // Записываем id выбранного пользователя
+            console.log('Selected User ID:', selectedUserId);
+            // Ваш остальной код для обновления активного чата и т.д.
+        });
+    });
+    
+$(function() {
+    var chat = new WebSocket("ws://localhost:8084");
+    chat.onmessage = function(e) {
+        $('#response').text('');
+        var response = JSON.parse(e.data);
+        if (response.type && response.type == "chat") {
+            console.log(chatId);
+            if(response.from == <?=Yii::$app->user->identity->getId() ?> && response.from != selectedUserId) {
+                $("#" + chatId).prepend(`<div class="block__message-window__chat__messages-user1">${response.from} ${response.date} ${response.message}</div>`);
+            } else {
+                $("#" + chatId).prepend(`<div class="block__message-window__chat__messages-user2">${response.from} ${response.date} ${response.message}</div>`);
+            }
+        } else if (response.message) {
+            console.log(response.message);
+        }
+    };
+
+    chat.onopen = function(e) {
+        console.log("Connection established!");
+        chat.send(JSON.stringify({"action": "setName", "name": "<?= Yii::$app->user->identity->getId() ?>"}));
+    };
+
+    chat.onerror = function(error) {
+        console.error('WebSocket Error:', error);
+    };
+
+    $("#sendMessageButton").click(function() {
+        //сюда мб добавить $("#" + chatId).prepend, а сверху мб одно условие
+        $.ajax({
+            url: 'message/save', // Укажите путь к вашему PHP-скрипту
+            method: 'POST',
+            data: {message: $("#messageInput").val(), chatId: chatId, _csrf: csrfToken},
+            success: function (response) {
+                if (selectedUserId && $("#messageInput").val()) {
+                    console.log("Sending message:", {"action" : "chat", "userId" : selectedUserId, "message" : $("#messageInput").val()});
+                    chat.send( JSON.stringify({"action" : "chat", "userId" : selectedUserId, "message" : $("#messageInput").val()}) );
+                    $("#messageInput").val("");
+                    console.log(chat);
+                } else {
+                    alert(<?= Yii::t('app', '"Select a user and enter the message"') ?>);
+                }
+            }
+        });
+    });
+
+   
+});
+
 </script>

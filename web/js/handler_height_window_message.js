@@ -5,7 +5,7 @@ function setHeight () {
     var sixtyPercentHeight = 0.65 * windowHeight;
 // Присваиваем высоту блоку
     document.querySelector(".block__message-window").style.height = sixtyPercentHeight + "px";
-    document.querySelector(".block__message-window-chat").style.height = 100 + "%";
+    document.querySelector(".block__message-window-chat").style.height = sixtyPercentHeight - 100 + "px";
     var svgElement = document.getElementById("mySvg");
     var chatElement = document.querySelector(".block__message-window-chat");
     var visibleHeight = chatElement.scrollHeight;
