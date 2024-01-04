@@ -197,6 +197,19 @@
     width: 70%;
     border: none;
     color: white;
+    padding-left: 10px;
+}
+
+.block__message-window__chat__messaging__input::placeholder
+{
+    color: rgba(155, 155, 155, 1);
+    font: 500 16px/1.22 'Montserrat';
+}
+
+.block__message-window__chat__messaging__input:focus, .block__message-window__chat__messaging__input
+{
+    outline: 0;
+    font: 500 16px/1.22 'Montserrat';
 }
 
 .block__message-window__chat__messaging__button
