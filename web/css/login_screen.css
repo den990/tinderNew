@@ -151,7 +151,7 @@ a {
 {
     background-color: #222222;
     width: 533px;
-    height: 364px;
+    height: 394px;
     border-radius: 43px;
     display: flex;
     flex-direction: column;
@@ -213,6 +213,13 @@ a {
     color: white;
     font: 600 36px/1.3 "Kodchasan";
     padding-left: 80px;
+}
+
+.invalid-feedback
+{
+    color: red;
+    padding-top: 5px;
+    font: 500 16px/1.22 'Montserrat';
 }
 
 @media screen and (max-width: 1600px)
