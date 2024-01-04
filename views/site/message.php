@@ -67,13 +67,19 @@ $this->title = 'Message';
                     <span class="block__message-window__chat__user-info__date">Был(а) 4 часа назад</span>
                 </div>
                 <div class="block__message-window__chat__messages" id="chat">
-                    <div class="block__message-window__chat__messages-user1">
-                        <span class="block__message-window__chat__messages-user1__text">Привет1</span>
-                        <span class="block__message-window__chat__messages-user1__time">19:43</span>
+                    <div class="block__message-window__chat__messages__container">
+                        <image src="images/user1-photo.png" >
+                            <div class="block__message-window__chat__messages-user1">
+                                <span class="block__message-window__chat__messages-user1__text">Привет1</span>
+                                <span class="block__message-window__chat__messages-user1__time">19:43</span>
+                            </div>
                     </div>
-                    <div class="block__message-window__chat__messages-user2">
-                        <span class="block__message-window__chat__messages-user2__text">Привет2</span>
-                        <span class="block__message-window__chat__messages-user2__time">19:42</span>
+                    <div class="block__message-window__chat__messages__container">
+                        <image src="images/user2-photo.png" >
+                            <div class="block__message-window__chat__messages-user2">
+                                <span class="block__message-window__chat__messages-user2__text">Привет2</span>
+                                <span class="block__message-window__chat__messages-user2__time">19:42</span>
+                            </div>
                     </div>
                 </div>
                 <div class="block__message-window__chat__messaging">

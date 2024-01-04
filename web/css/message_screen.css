@@ -149,7 +149,7 @@
     padding: 10px 5px 9px 10px;
     width: fit-content;
     border-radius: 45px;
-    margin-bottom: 10px;
+    margin-left: 5px;
 }
 
 .block__message-window__chat__messages-user1
@@ -209,4 +209,12 @@
 {
     font: 500 16px/1.22 'Montserrat';
     color: white;
+}
+
+.block__message-window__chat__messages__container
+{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: center;
 }
