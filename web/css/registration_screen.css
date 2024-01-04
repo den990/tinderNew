@@ -153,28 +153,11 @@ a {
     padding-left: 80px;
 }
 
-.login-button
+.register-block
 {
-    background: white;
-    border-radius: 33px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 80px;
-}
-
-.login-button:visited,
-.login-button:hover,
-.login-button:focus
-{
-    color: black;
-}
-.login-button__text
-{
-    font: 600 20px/1.22 "Montserrat";
-    margin-left: 26px;
-    margin-right: 26px;
-    color: black;
 }
 
 .register-form
@@ -186,14 +169,13 @@ a {
   max-width: 38%;
   height: 780px;
   border-radius: 43px;
-  margin-left: 122px;
-  margin-top: 82px;
 }
 
 .register-form__title
 {
     font: 600 30px/1.22 "Montserrat";
     padding-top: 27px;
+    padding-bottom: 15px;
     color: white;
 }
 
@@ -271,13 +253,20 @@ input::-webkit-calendar-picker-indicator {
     padding: 9px 0 8px 22px;
 }
 
+.invalid-feedback
+{
+    color: red;
+    padding-top: 5px;
+    font: 500 12px/1.22 'Montserrat';
+}
+
 @media screen and (max-width: 1600px)
 {
     .register-form
     {
         margin-top: 41px;
-        height: 520px;
-        max-width: 35%;
+        height: fit-content;
+        width: 500px;
     }
     .register-form__title
     {
@@ -286,7 +275,7 @@ input::-webkit-calendar-picker-indicator {
     .register-form__elements__input-text, .register-form__elements__input-date, .register-form__elements__input-select
     {
         max-width: 100%;
-        margin-top: 15px;
+        margin-top: 5px;
         font: 600 14px/1.22 "Montserrat";
         padding-top: 5px;
         padding-bottom: 4px;
@@ -302,6 +291,7 @@ input::-webkit-calendar-picker-indicator {
         font: 600 20px/1.22 "Montserrat";
         margin-left: 60px;
         margin-top: 30px;
+        margin-bottom: 20px;
     }
     .big-select
     {
