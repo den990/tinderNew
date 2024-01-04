@@ -144,14 +144,29 @@
     overflow-y: auto;
 }
 
+.block__message-window__chat__messages-user1, .block__message-window__chat__messages-user2
+{
+    padding: 10px 5px 9px 10px;
+    width: fit-content;
+    border-radius: 45px;
+    margin-bottom: 10px;
+}
+
 .block__message-window__chat__messages-user1
 {
-    color : white;
+    background: rgba(50, 50, 50, 1);
 }
 
 .block__message-window__chat__messages-user2
 {
-    color:white;
+    background: linear-gradient(to right bottom, rgba(64, 200, 1, 1), rgba(2, 200, 81, 1));
+}
+
+.block__message-window__chat__messages-user1__time, .block__message-window__chat__messages-user2__time
+{
+    color: white;
+    font: 500 9px/1.22 'Montserrat';
+    padding-left: 5px;
 }
 
 .block__message-window__chat__messaging
@@ -188,4 +203,10 @@
 {
     border: none;
     background: inherit;
+}
+
+.block__message-window__chat__messages-user1__text, .block__message-window__chat__messages-user2__text
+{
+    font: 500 16px/1.22 'Montserrat';
+    color: white;
 }

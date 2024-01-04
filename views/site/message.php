@@ -68,10 +68,12 @@ $this->title = 'Message';
                 </div>
                 <div class="block__message-window__chat__messages" id="chat">
                     <div class="block__message-window__chat__messages-user1">
-                        Привет1
+                        <span class="block__message-window__chat__messages-user1__text">Привет1</span>
+                        <span class="block__message-window__chat__messages-user1__time">19:43</span>
                     </div>
                     <div class="block__message-window__chat__messages-user2">
-                        Привет2
+                        <span class="block__message-window__chat__messages-user2__text">Привет2</span>
+                        <span class="block__message-window__chat__messages-user2__time">19:42</span>
                     </div>
                 </div>
                 <div class="block__message-window__chat__messaging">
