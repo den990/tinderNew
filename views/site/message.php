@@ -6,6 +6,7 @@
 
 /** @var array $users */
 
+use app\models\Chat;
 use app\models\Photo;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
@@ -15,6 +16,7 @@ use app\assets\MessageScreenAsset;
 use app\models\UserTinder;
 use consik\yii2websocket\WebSocketServer;
 use Ratchet\ConnectionInterface;
+use app\models\Message;
 
 
 MessageScreenAsset::register($this);
@@ -39,13 +41,26 @@ $this->title = 'Message';
                     $photoPath = $modelPhoto->getImageUrl();
                     $photoPath = Url::to($photoPath, true);
                     $dialogId = 'dialog_' . $user['id_user'];
+                    $chat = null;
+                    $currentUserId = Yii::$app->user->getId();
+                    if ($user['id_user'] > $currentUserId) {
+                        $chat = Chat::findOne(['id_user_1' => $currentUserId, 'id_user_2' => $user['id_user']]);
+                    }
+                    else
+                    {
+                        $chat = Chat::findOne(['id_user_1' => $user['id_user'], 'id_user_2' => $currentUserId]);
+                    }
+                    $lastMessage = Message::find()
+                        ->where(['id_chat' => $chat->id_chat])
+                        ->orderBy(['id_message' => SORT_DESC])
+                        ->one();
                     ?>
                     <div class="block__message-window-chat-user" id="<?= $dialogId ?>" data-user-id="<?= $user['id_user'] ?>">
                         <img src="<?= $photoPath ?>" class="block__message-window-chat-user-photo" width="80px"
                              height="80px">
                         <div class="block__message-window-chat-user-info">
                             <span class="block__message-window-chat-user-info-name"><?= $user['first_name'] ?> <?= $user['last_name'] ?></span>
-                            <span class="block__message-window-chat-user-info-message">Сори не тебе пригожин с ...</span>
+                            <span class="block__message-window-chat-user-info-message"><?= isset($lastMessage->text) ? $lastMessage->text : 'Начать общение' ?></span>
                         </div>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 100% 2" fill="none">
@@ -67,20 +82,7 @@ $this->title = 'Message';
                     <span class="block__message-window__chat__user-info__date">Был(а) 4 часа назад</span>
                 </div>
                 <div class="block__message-window__chat__messages" id="chat">
-                    <div class="block__message-window__chat__messages__container">
-                        <image src="images/user1-photo.png" >
-                            <div class="block__message-window__chat__messages-user1">
-                                <span class="block__message-window__chat__messages-user1__text">Привет1</span>
-                                <span class="block__message-window__chat__messages-user1__time">19:43</span>
-                            </div>
-                    </div>
-                    <div class="block__message-window__chat__messages__container">
-                        <image src="images/user2-photo.png" >
-                            <div class="block__message-window__chat__messages-user2">
-                                <span class="block__message-window__chat__messages-user2__text">Привет2</span>
-                                <span class="block__message-window__chat__messages-user2__time">19:42</span>
-                            </div>
-                    </div>
+
                 </div>
                 <div class="block__message-window__chat__messaging">
                     <input type="text" id="messageInput" class="block__message-window__chat__messaging__input" placeholder="Написать сообщение...">
@@ -150,6 +152,25 @@ $this->title = 'Message';
                 success: function (response) {
                     chat.setAttribute('id', 'chat' + response.dialog);
                     chatId = 'chat' + response.dialog;
+                    chat.innerHTML = '';
+                    <?php
+                        Yii::$app->session->set('defaultLimitMessages', Yii::$app->params['defaultLimitMessages']);
+                        Yii::$app->session->set('countMessage', 0);
+                    ?>
+                    for (let i = 0; i < response.messages.length; i++) {
+                        const response1 = response.messages[i];
+                        $("#" + chatId).append(`
+                            <div class="block__message-window__chat__messages__container">
+                                <image src="${response1.path}" class="block__message-window__chat__messages-user-icon">
+                                ${response1.id_user == <?= Yii::$app->user->getId() ?> ?
+                                    `<div class="block__message-window__chat__messages-user1">` :
+                                    `<div class="block__message-window__chat__messages-user2">`}
+                                        <span class="block__message-window__chat__messages-user1__text">${response1.text}</span>
+                                        <span class="block__message-window__chat__messages-user1__time">${response1.date}</span>
+                                    </div>
+                            </div>
+                        `);
+                    }
                     console.log(response.dialog);
                 }
             });
@@ -188,11 +209,34 @@ $(function() {
         var response = JSON.parse(e.data);
         if (response.type && response.type == "chat") {
             console.log(chatId);
-            if(response.from == <?=Yii::$app->user->identity->getId() ?> && response.from != selectedUserId) {
-                $("#" + chatId).prepend(`<div class="block__message-window__chat__messages-user1">${response.from} ${response.date} ${response.message}</div>`);
-            } else {
-                $("#" + chatId).prepend(`<div class="block__message-window__chat__messages-user2">${response.from} ${response.date} ${response.message}</div>`);
-            }
+            $.ajax({
+                url: 'message/get-photo-user', // Укажите путь к вашему PHP-скрипту
+                method: 'POST',
+                data: {userId: response.from, _csrf: csrfToken},
+                success: function (responseGet) {
+                    if(response.from == <?=Yii::$app->user->identity->getId() ?> && response.from != selectedUserId) {
+                        $("#" + chatId).prepend(`
+                        <div class="block__message-window__chat__messages__container">
+                            <image src="${responseGet.path}" class="block__message-window__chat__messages-user-icon">
+                                <div class="block__message-window__chat__messages-user1">
+                                    <span class="block__message-window__chat__messages-user1__text">${response.message}</span>
+                                    <span class="block__message-window__chat__messages-user1__time">${response.date}</span>
+                                </div>
+                        </div>`);
+                    }
+                    else {
+                        $("#" + chatId).prepend(`
+                        <div class="block__message-window__chat__messages__container">
+                            <image src="${responseGet.path}" class="block__message-window__chat__messages-user-icon">
+                            <div class="block__message-window__chat__messages-user2">
+                                <span class="block__message-window__chat__messages-user2__text">${response.message}</span>
+                                <span class="block__message-window__chat__messages-user2__time">${response.date}</span>
+                            </div>
+                        </div>`);
+                    }
+                }
+            });
+
         } else if (response.message) {
             console.log(response.message);
         }
@@ -228,5 +272,52 @@ $(function() {
 
    
 });
+
+
+    $(document).ready(function() {
+        var chatContainer = $('.block__message-window__chat__messages');
+        var loading = false;
+
+        chatContainer.on('scroll', function() {
+            var scrollTop = -chatContainer.scrollTop();
+            var scrollHeight = chatContainer[0].scrollHeight;
+            var outerHeight = chatContainer.outerHeight();
+
+            // Когда скролл достигает нижней границы и не идет загрузка, подгружаем новые сообщения
+            if ((scrollTop + outerHeight >= scrollHeight - 10) && !loading) {
+                loading = true;
+
+                $.ajax({
+                    url: 'message/get-message',
+                    method: 'POST',
+                    data: {chatId: chatId, _csrf: csrfToken},
+                    success: function (responseGetMessage) {
+                        for (let i = 0; i < responseGetMessage.length; i++) {
+                            const response = responseGetMessage[i];
+                            $("#" + chatId).append(`
+                                <div class="block__message-window__chat__messages__container">
+                                    <image src="${response.path}" class="block__message-window__chat__messages-user-icon">
+                                    ${response.id_user == <?= Yii::$app->user->getId() ?> ?
+                                    `<div class="block__message-window__chat__messages-user1">` :
+                                    `<div class="block__message-window__chat__messages-user2">`}
+                                        <span class="block__message-window__chat__messages-user1__text">${response.text}</span>
+                                        <span class="block__message-window__chat__messages-user1__time">${response.date}</span>
+                                    </div>
+                                </div>`);
+                        }
+
+                        // Устанавливаем loading обратно в false после успешной загрузки
+                        loading = false;
+                    },
+                    error: function () {
+                        // В случае ошибки также устанавливаем loading в false
+                        loading = false;
+                    }
+                });
+            }
+        });
+    });
+
+
 
 </script>

@@ -14,7 +14,7 @@ use Yii;
 
 class FindController extends Controller
 {
-    public $users; // Переименовал свойство для единообразия
+    public $users;
     private $count;
     private $limitCount;
     private $previousUser;

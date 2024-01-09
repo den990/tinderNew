@@ -59,4 +59,15 @@ class Message extends ActiveRecord implements IdentityInterface
     {
         throw new NotSupportedException('"validateAuthKey" is not implemented.');
     }
+
+    public function getShortInfo()
+    {
+        $photo = Photo::findOne(['id_user' => $this->id_user]);
+        return [
+            'text' => $this->text,
+            'date' => $this->date,
+            'id_user' => $this->id_user,
+            'path' => $photo->getImageUrlForJs()
+        ];
+    }
 }

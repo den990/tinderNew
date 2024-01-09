@@ -33,6 +33,12 @@ class Photo extends ActiveRecord implements IdentityInterface
         return $url;
     }
 
+    public function getImageUrlForJs()
+    {
+        $url = str_replace('@app/web', '', $this->path);
+        return $url;
+    }
+
     public static function findIdentityByAccessToken($token, $type = null)
     {
         throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
