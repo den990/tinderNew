@@ -86,6 +86,10 @@
 }
 .block__message-window-chat-user-info-message
 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
     margin-top: 1%;
     color: rgba(155, 155, 155, 1);
     font: 500 16px/1.22 'Montserrat';

@@ -214,7 +214,7 @@ $(function() {
                 method: 'POST',
                 data: {userId: response.from, _csrf: csrfToken},
                 success: function (responseGet) {
-                    if(response.from == <?=Yii::$app->user->identity->getId() ?> && response.from != selectedUserId) {
+                    if(response.from == <?=Yii::$app->user->identity->getId() ?>) { //надо поменять
                         $("#" + chatId).prepend(`
                         <div class="block__message-window__chat__messages__container">
                             <image src="${responseGet.path}" class="block__message-window__chat__messages-user-icon">
@@ -225,6 +225,8 @@ $(function() {
                         </div>`);
                     }
                     else {
+                        if (response.from == selectedUserId)
+                        {
                         $("#" + chatId).prepend(`
                         <div class="block__message-window__chat__messages__container">
                             <image src="${responseGet.path}" class="block__message-window__chat__messages-user-icon">
@@ -233,6 +235,7 @@ $(function() {
                                 <span class="block__message-window__chat__messages-user2__time">${response.date}</span>
                             </div>
                         </div>`);
+                        }
                     }
                 }
             });

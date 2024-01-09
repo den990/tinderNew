@@ -54,7 +54,6 @@ class MessageController extends Controller
         $messageListForm->messages = $messageListForm->getMessagesWithParameters(Yii::$app->params['defaultLimitMessages'], $offset, $chatIdNumber);
         $messageListForm->messages = $messageListForm->serialize();
         Yii::$app->session->set('countMessage', $offset + Yii::$app->params['defaultLimitMessages']);
-        //кежшировать с помощью set и забирать с get, при клике на новый чат set'ом обнуляем все, миграция для изменения жаты с временем
         Yii::$app->response->format = Response::FORMAT_JSON;
         return $messageListForm->messages;
     }
