@@ -40,6 +40,7 @@ $this->title = 'Notification';
                         <span class="block__notification-window-main-user-text">
                             Вы понравились пользователю
                             <a href="<?= 'profile/other?' . 'userId='. $user['id_user']?>" style="color: #0CE463;"><?= $user['first_name'] ?> <?= $user['last_name'] ?></a>
+                            <?=$user['date'] ?>
                         </span>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="2" viewBox="0 0 100% 2" fill="none">

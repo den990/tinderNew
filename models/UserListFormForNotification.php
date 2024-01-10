@@ -32,7 +32,7 @@ class UserListFormForNotification extends Model
         foreach($userIdLikes as $userIdLike)
         {
             $modelUser = UserTinder::findOne(['id_user' => $userIdLike['id_user_1']]);
-            $result[] = $modelUser->serializeForNotification();
+            $result[] = $modelUser->serializeForNotification($userIdLike['date']);
         }
 
         return $result;

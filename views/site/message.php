@@ -128,11 +128,13 @@ $this->title = 'Message';
                     userLink.innerText = response.userName;
 
                     var sendIcon = document.querySelector('.block__message-window__chat__messaging__icon');
-
+                    var sendButton = document.querySelector('.block__message-window__chat__messaging__button')
                     if (response.block) {
                         sendIcon.setAttribute('src', 'images/icon_send_error.svg');
+                        sendButton.setAttribute('id', 'noSendMessageButton')
                     } else {
                         sendIcon.setAttribute('src', 'images/icon_send.svg');
+                        sendButton.setAttribute('id', 'sendMessageButton')
                     }
 
 
@@ -255,22 +257,32 @@ $(function() {
     };
 
     $("#sendMessageButton").click(function() {
-        //сюда мб добавить $("#" + chatId).prepend, а сверху мб одно условие
-        $.ajax({
-            url: 'message/save', // Укажите путь к вашему PHP-скрипту
-            method: 'POST',
-            data: {message: $("#messageInput").val(), chatId: chatId, _csrf: csrfToken},
-            success: function (response) {
-                if (selectedUserId && $("#messageInput").val()) {
-                    console.log("Sending message:", {"action" : "chat", "userId" : selectedUserId, "message" : $("#messageInput").val()});
-                    chat.send( JSON.stringify({"action" : "chat", "userId" : selectedUserId, "message" : $("#messageInput").val()}) );
-                    $("#messageInput").val("");
-                    console.log(chat);
-                } else {
-                    alert(<?= Yii::t('app', '"Select a user and enter the message"') ?>);
+        // сюда, возможно, стоит добавить $("#" + chatId).prepend, а сверху - одно условие
+        if ($("#sendMessageButton").attr('id') === 'sendMessageButton') {
+            $.ajax({
+                url: 'message/save', // Укажите путь к вашему PHP-скрипту
+                method: 'POST',
+                data: {message: $("#messageInput").val(), chatId: chatId, _csrf: csrfToken},
+                success: function (response) {
+                    if (selectedUserId && $("#messageInput").val()) {
+                        console.log("Sending message:", {
+                            "action": "chat",
+                            "userId": selectedUserId,
+                            "message": $("#messageInput").val()
+                        });
+                        chat.send(JSON.stringify({
+                            "action": "chat",
+                            "userId": selectedUserId,
+                            "message": $("#messageInput").val()
+                        }));
+                        $("#messageInput").val("");
+                        console.log(chat);
+                    } else {
+                        alert(<?= Yii::t('app', '"Select a user and enter the message"') ?>);
+                    }
                 }
-            }
-        });
+            });
+        }
     });
 
    

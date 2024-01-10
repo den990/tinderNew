@@ -127,13 +127,14 @@ class UserTinder extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function serializeForNotification()
+    public function serializeForNotification($date)
     {
         return [
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'photoId' => $this->photo,
             'id_user' => $this->getId(), // потом нужно будет для профилей
+            'date' => $date,
         ];
     }
 
