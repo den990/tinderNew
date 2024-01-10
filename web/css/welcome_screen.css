@@ -18,7 +18,7 @@
 }
 
 .register-button:visited,
-.register-button:active
+.register-button:active,
 .register-button:hover,
 .register-button:focus
 {
@@ -31,6 +31,13 @@
     margin-bottom: 38px;
 }
 
+.preference-button:visited,
+.preference-button:active,
+.preference-button:hover,
+.preference-button:focus
+{
+    color: black;
+}
 @media screen and (max-width: 1600px)
 {
     .title
@@ -46,5 +53,20 @@
         font: 600 24px/1.22 "Montserrat";
         margin-top: 19px;
         margin-bottom: 19px;
+    }
+    .preference-button
+    {
+        background: linear-gradient(to right, rgba(12, 228, 99, 1), rgba(96, 208, 9, 1));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 40px;
+        margin-top: 30px;
+    }
+    .preference-button__text
+    {
+        color: black;
+        font: 600 24px/1.22 'Montserrat';
+        padding: 18px 101px;
     }
 }
