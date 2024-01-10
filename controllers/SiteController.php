@@ -280,4 +280,9 @@ class SiteController extends Controller
     {
         return $this->render('test');
     }
+
+    public function actionPreferences()
+    {
+        return $this->render('preferences');
+    }
 }

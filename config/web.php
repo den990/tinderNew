@@ -63,7 +63,8 @@ $config = [
                 'find' => 'site/find',
                 'finding' => 'find/redirect',
                 'other-profile' => 'site/other-profile',
-                'GET profile/other' => 'profileOther/other'
+                'GET profile/other' => 'profileOther/other',
+                'preferences' => 'site/preferences'
             ],
         ],
 
