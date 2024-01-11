@@ -1,0 +1,124 @@
+.container
+{
+    display: flex;
+    justify-content: center;
+}
+
+.preferences-block
+{
+    display: flex;
+    flex-direction: column;
+    max-width: 700px;
+    background: rgba(34, 34, 34, 1);
+    border-radius: 40px;
+}
+.preferences-block__title
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.preferences-block__title__text
+{
+    color: white;
+    font: 500 24px/1.22 'Montserrat';
+    padding-top: 18px;
+    padding-bottom: 16px;
+}
+
+.preferences-block__main__sex-age__labels__text, .preferences-block__main__city__text
+{
+    color: rgba(155, 155, 155, 1);
+    font: 600 16px/1.22 'Montserrat';
+}
+
+.preferences-block__main__button
+{
+    border-radius: 20px;
+    background: linear-gradient(to right, rgba(12, 228, 99, 1), rgba(96, 208, 9, 1));
+    padding: 14px 45px;
+    color: white;
+    font: 600 16px/1.22 'Montserrat';
+    border: none;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.input-style
+{
+    border-radius: 20px;
+    border: 1px solid rgba(155, 155, 155, 1);
+    background: rgba(26, 26, 24, 1);
+    padding-top: 14px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+
+.input-style:focus
+{
+    outline: 0;
+}
+
+.input-style::placeholder, .input-style
+{
+    color: rgba(255, 255, 255, 1);
+    font: 600 16px/1.22 'Montserrat';
+}
+
+.preferences-block__main__sex-age__inputs__sex
+{
+    max-width: 101px;
+}
+
+.preferences-block__main__sex-age__inputs__age-min, .preferences-block__main__sex-age__inputs__age-max
+{
+    max-width: 82px;
+    margin-left: 9px;
+}
+
+.preferences-block__main__city, .preferences-block__main
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.preferences-block__main__city
+{
+    margin-top: 15px;
+}
+
+.preferences-block__main__sex-age
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.preferences-block__main__sex-age
+{
+    padding-left: 89px;
+    padding-right: 89px;
+}
+
+.preferences-block__main__city__input
+{
+    min-width: 320px;
+}
+
+.preferences-block__main__sex-age__labels__text_sex
+{
+    padding-left: 32px;
+}
+
+.preferences-block__main__sex-age__labels__text_age
+{
+    padding-left: 120px;
+}
+
+.preferences-block__main__sex-age__labels, .preferences-block__main__city__text
+{
+    margin-bottom: 9px;
+}
+
