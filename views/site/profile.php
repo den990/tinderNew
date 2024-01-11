@@ -48,7 +48,7 @@ $this->title = "Profile";
             <?= $form->field($model, 'location')->dropDownList($cities, [
                     'class' => 'profile-editing__fields__text-fields__input-select__city',
                     'options' => [
-                            '0' => ['disabled' => true, 'selected' => true],
+                            '1' => ['disabled' => true, 'selected' => true],
                         ],
             ])->label(false) ?>
 

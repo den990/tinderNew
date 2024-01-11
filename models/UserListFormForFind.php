@@ -28,19 +28,36 @@ class UserListFormForFind extends Model
         $currentUserId = Yii::$app->user->id;
         $currentUser = UserTinder::findOne(['id_user'=> $currentUserId]);
 
-        $oppositeGender = ($currentUser->gender != 0) ? 1 : 0; // пока однополые стоят
+        //тут с preferences
+        $preferences = Preferences::findOne(['id_user' => $currentUserId]);
 
-        $minAge = $currentUser->getAge() - 5; // можно в константу вынести
-        $maxAge = $currentUser->getAge() + 5;
+        $oppositeGender = $preferences->gender; // пока однополые стоят
 
-        return UserTinder::find()
-            ->where(['and',
-                ['between', 'birthday', date('Y-m-d', strtotime("-{$maxAge} years")), date('Y-m-d', strtotime("-{$minAge} years"))],
-                ['gender' => $oppositeGender],
-                ['not', ['id_user' => $currentUser->id_user]],
-            ])->limit(Yii::$app->params['defaultLimit'])
-            ->offset($offset)
-            ->all();
+        $minAge = $preferences->age_start; // можно в константу вынести
+        $maxAge = $preferences->age_end;
+        $city = $preferences->location;
+        if ($city != 1) {
+            return UserTinder::find()
+                ->where(['and',
+                    ['between', 'birthday', date('Y-m-d', strtotime("-{$maxAge} years")), date('Y-m-d', strtotime("-{$minAge} years"))],
+                    ['gender' => $oppositeGender],
+                    ['not', ['id_user' => $currentUser->id_user]],
+                    ['location' => $city],
+                ])->limit(Yii::$app->params['defaultLimit'])
+                ->offset($offset)
+                ->all();
+        }
+        else
+        {
+            return UserTinder::find()
+                ->where(['and',
+                    ['between', 'birthday', date('Y-m-d', strtotime("-{$maxAge} years")), date('Y-m-d', strtotime("-{$minAge} years"))],
+                    ['gender' => $oppositeGender],
+                    ['not', ['id_user' => $currentUser->id_user]],
+                ])->limit(Yii::$app->params['defaultLimit'])
+                ->offset($offset)
+                ->all();
+        }
     }
 
 

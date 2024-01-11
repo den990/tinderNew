@@ -6,6 +6,7 @@ use app\models\Chat;
 use app\models\enums\Status;
 use app\models\Like;
 use app\models\Match;
+use app\models\Preferences;
 use app\models\UserListFormForFind;
 use app\models\UserListFormForMessage;
 use app\models\UserListFormForNotification;
@@ -203,6 +204,8 @@ class SiteController extends Controller
             $userId = Yii::$app->user->getId();
             $model = UserTinderUpdate::find()->where(['id_user' => $userId])->one();
             $cities = array_keys(Cities::$codeToValue);
+            $cities = array_merge(['1'], array_keys(Cities::$codeToValue));
+            unset($cities['0']);
             return $this->render('profile', [
                 'model' => $model,
                 'cities' => $cities
@@ -250,23 +253,26 @@ class SiteController extends Controller
         }
         else
         {
-            $modelUserListForm = new UserListFormForFind();
-            $modelUserListForm->users = $modelUserListForm->getUsersWithParameters(0);
-            $modelUserListForm->users = $modelUserListForm->serialize();
-            $user = array_shift($modelUserListForm->users);
-            if ($user) {
+            $preferences = Preferences::findOne(['id_user' => Yii::$app->user->getId()]);
+            if ($preferences) {
+                $modelUserListForm = new UserListFormForFind();
+                $modelUserListForm->users = $modelUserListForm->getUsersWithParameters(0);
+                $modelUserListForm->users = $modelUserListForm->serialize();
+                $user = array_shift($modelUserListForm->users);
 
-                Yii::$app->session->set('userListForm', $modelUserListForm->users);
-                Yii::$app->session->set('limitCount', Yii::$app->params['defaultLimit']);
-                Yii::$app->session->set('count', 1);
-                Yii::$app->session->set('previousUser', $user);
 
-                return $this->render('find', ['user' => $user]);
+                    Yii::$app->session->set('userListForm', $modelUserListForm->users);
+                    Yii::$app->session->set('limitCount', Yii::$app->params['defaultLimit']);
+                    Yii::$app->session->set('count', 1);
+                    Yii::$app->session->set('previousUser', $user);
+
+                    return $this->render('find', ['user' => $user]);
 //            return $this->redirect(['test/print', 'user' => $modelUserListForm->users]);
+
             }
             else
             {
-                return $this->goHome();
+                return $this->actionPreferences();
             }
         }
     }
@@ -283,6 +289,39 @@ class SiteController extends Controller
 
     public function actionPreferences()
     {
-        return $this->render('preferences');
+        $model = new UserTinder();
+        if (Yii::$app->user->isGuest)
+        {
+            return $this->render('login', ['model' => $model]);
+        }
+        else {
+            $cities = array_merge(['1'], array_keys(Cities::$codeToValue));
+            unset($cities['0']);
+            $cities[1] = 'Все города';
+            $userId = Yii::$app->user->getId();
+            $modelPreferences = Preferences::find()->where(['id_user' => $userId])->one();
+            if (!$modelPreferences ) {
+                $modelUser = UserTinder::find()->where(['id_user' => $userId])->one();
+                $modelPreferences= new Preferences();
+                $modelPreferences->id_user = $userId;
+                $modelPreferences->location = $modelUser->location;
+                $modelPreferences->gender = $modelUser->gender; // за пол
+                if ($modelUser->getAge() - 5 > 0) {
+                    $modelPreferences->age_start = $modelUser->getAge() - 5;
+                }
+                else
+                {
+                    $modelPreferences->age_start = 1;
+                }
+                $modelPreferences->age_end = $modelUser->getAge() + 5;
+                if (!$modelPreferences->save()) {
+                    Yii::error("Error saving Preferences model: " . print_r($modelPreferences->errors, true), 'app\controllers\SiteController');
+                }
+            }
+            return $this->render('preferences', [
+                'model' => $modelPreferences ,
+                'cities' => $cities
+            ]);
+        }
     }
 }

@@ -3,7 +3,7 @@
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
 
-/** @var app\models\UserTinderUpdate $model */
+/** @var app\models\Preferences $model */
 
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
@@ -23,6 +23,7 @@ $this->title = "Preferences";
     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="3" fill="none">
         <path d="M0 1H3000" stroke="#3F3F3F" stroke-width="3"/>
     </svg>
+    <?php $form = ActiveForm::begin(['action' => ['preferences/update'], 'options' => ['enctype' => 'multipart/form-data']] ); ?>
     <div class="preferences-block__main">
         <div class="preferences-block__main__sex-age">
             <div class="preferences-block__main__sex-age__labels">
@@ -30,15 +31,18 @@ $this->title = "Preferences";
                 <span class="preferences-block__main__sex-age__labels__text preferences-block__main__sex-age__labels__text_age">Возраст</span>
             </div>
             <div class="preferences-block__main__sex-age__inputs">
-                <input type="text" placeholder="Пол" class="input-style preferences-block__main__sex-age__inputs__sex">
-                <input type="text" placeholder="От" class="input-style preferences-block__main__sex-age__inputs__age-min">
-                <input type="text" placeholder="До" class="input-style preferences-block__main__sex-age__inputs__age-max">
+                <?= $form->field($model, 'gender')->dropDownList(['0' => 'Мужской', '1' => 'Женский'], ['class' => 'input-style preferences-block__main__sex-age__inputs__sex'])->label(false) ?>
+                <?= $form->field($model, 'age_start')->textInput(['placeholder' => 'От', 'class' => 'input-style preferences-block__main__sex-age__inputs__age-min'])->label(false) ?>
+                <?= $form->field($model, 'age_end')->textInput(['placeholder' => 'До', 'class' => 'input-style preferences-block__main__sex-age__inputs__age-max'])->label(false) ?>
             </div>
         </div>
         <div class="preferences-block__main__city">
             <span class="preferences-block__main__city__text">Город</span>
-            <input type="text" placeholder="Город" class="input-style preferences-block__main__city__input">
+            <?= $form->field($model, 'location')->dropDownList($cities, [
+                'class' => 'input-style preferences-block__main__city__input',
+            ])->label(false) ?>
         </div>
-        <button class="preferences-block__main__button">Сохранить</button>
+        <?= Html::submitButton('Сохранить', ['class' => 'preferences-block__main__button']) ?>
     </div>
+    <?php ActiveForm::end(); ?>
 </div>

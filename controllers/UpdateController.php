@@ -17,7 +17,8 @@ class UpdateController extends Controller
 
     public function actionUpdate()
     {
-        $cities = array_keys(Cities::$codeToValue);
+        $cities = array_merge(['1'], array_keys(Cities::$codeToValue));
+        unset($cities['0']);
         $existingId = Yii::$app->user->getId();
         $existingUserTinder = UserTinder::find()->where(['id_user' => $existingId])->one();
         $modelTinderUser = new UserTinderUpdate();
