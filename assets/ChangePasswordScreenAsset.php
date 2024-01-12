@@ -2,7 +2,9 @@
 
 namespace app\assets;
 
-class ChangePasswordScreenAsset
+use yii\web\AssetBundle;
+
+class ChangePasswordScreenAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
