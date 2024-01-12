@@ -66,15 +66,10 @@
     font: 600 16px/1.22 'Montserrat';
 }
 
-.preferences-block__main__sex-age__inputs__sex
-{
-    max-width: 101px;
-}
-
 .preferences-block__main__sex-age__inputs__age-min, .preferences-block__main__sex-age__inputs__age-max
 {
     max-width: 82px;
-    margin-left: 9px;
+    margin-left: 12px;
 }
 
 .preferences-block__main__city, .preferences-block__main
@@ -109,12 +104,13 @@
 
 .preferences-block__main__sex-age__labels__text_sex
 {
-    padding-left: 32px;
+    padding-left: 36px;
+
 }
 
 .preferences-block__main__sex-age__labels__text_age
 {
-    padding-left: 120px;
+    padding-left: 116px;
 }
 
 .preferences-block__main__sex-age__labels, .preferences-block__main__city__text
@@ -122,3 +118,16 @@
     margin-bottom: 9px;
 }
 
+.preferences-block__main__sex-age__inputs
+{
+    display: flex;
+}
+
+.invalid-feedback
+{
+    color: red;
+    padding-top: 5px;
+    font: 500 16px/1.22 'Montserrat';
+    max-width: 82px;
+    padding-left: 19px;
+}
