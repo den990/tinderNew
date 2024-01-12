@@ -264,7 +264,7 @@ input::-webkit-calendar-picker-indicator {
     .profile-editing
     {
         width: 900px;
-        height: 505px;
+        height: 495px;
     }
     .profile-editing__title-bar
     {
@@ -358,7 +358,7 @@ input::-webkit-calendar-picker-indicator {
         background: linear-gradient(to right, #00A3FF, #00A3FF);
         color: white;
         border-radius: 45px;
-        max-width: 201px;
+        max-width: 300px;
         padding: 5px 60px;
         font: 600 20px/1.22 'Montserrat';
         border: none;
@@ -440,7 +440,8 @@ textarea:focus:-ms-input-placeholder      {opacity: 0; transition: opacity 0.3s 
 
 .profile-editing__block-with-photo__photo-picker
 {
-    margin-left: 10%;
+    margin-left: 17%;
     display: flex;
     flex-direction: column;
+    padding-top: 5px;
 }

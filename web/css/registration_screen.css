@@ -274,7 +274,7 @@ input::-webkit-calendar-picker-indicator {
     }
     .register-form__elements__input-text, .register-form__elements__input-date, .register-form__elements__input-select
     {
-        max-width: 100%;
+        max-width: 434px;
         margin-top: 5px;
         font: 600 14px/1.22 "Montserrat";
         padding-top: 5px;
@@ -289,21 +289,9 @@ input::-webkit-calendar-picker-indicator {
     .register-form__elements__button
     {
         font: 600 20px/1.22 "Montserrat";
-        margin-left: 60px;
-        margin-top: 30px;
-        margin-bottom: 20px;
-    }
-    .big-select
-    {
-        width: 94%;
-    }
-    .big-input-text
-    {
-        width: 415px;
-        padding-right: 0;
+        margin: 30px 60px 20px 60px;
     }
 }
-
 
 .input-file {
     position: relative;

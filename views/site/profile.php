@@ -68,6 +68,7 @@ $this->title = "Profile";
                 <span class="profile-editing__fields__text-fields__text first-text">Дополнительная информация</span>
                 <?= $form->field($model, 'description')->textarea(['placeholder' => 'Дополнительная информация', 'class' => 'profile-editing__fields__text-fields__input-text big-text', 'rows' => '6'])->label(false) ?>
             </div>
+            <button class="profile-editing__fields__photo-button-block__change-password-button">Сменить пароль</button>
         </div>
         <div class="profile-editing__fields__photo-button-block">
             <?php $photoId = $model->getPhotoId();
@@ -89,7 +90,6 @@ $this->title = "Profile";
                     'onclick' => 'exit()',
                 ]) ?>
             </div>
-            <button class="profile-editing__fields__photo-button-block__change-password-button">Сменить пароль</button>
         </div>
     </div>
 

@@ -27,44 +27,46 @@ $this->registerJs("
 <div class="register-block">
     <div class="register-form">
         <span class="register-form__title">Найдите свою вторую половинку</span>
-        <?php $form = ActiveForm::begin(['action' => ['registration/register'], 'options' => ['enctype' => 'multipart/form-data'], 'fieldConfig' => [
-            'errorOptions' => ['class' => 'invalid-feedback', 'encode' => false],
-        ],] ); ?>
-        <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
+        <div style="padding-left: 30px">
+            <?php $form = ActiveForm::begin(['action' => ['registration/register'], 'options' => ['enctype' => 'multipart/form-data'], 'fieldConfig' => [
+                'errorOptions' => ['class' => 'invalid-feedback', 'encode' => false],
+            ],] ); ?>
+            <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
 
-        <div class="register-form__elements__block-with-photo">
-            <div class="register-form__elements__block-with-photo__info">
-                <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Имя', 'class' => 'register-form__elements__input-text small-field'])->label(false) ?>
-                <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'register-form__elements__input-text small-field'])->label(false) ?>
-                <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'register-form__elements__input-select'])->label(false) ?>
+            <div class="register-form__elements__block-with-photo">
+                <div class="register-form__elements__block-with-photo__info">
+                    <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Имя', 'class' => 'register-form__elements__input-text small-field'])->label(false) ?>
+                    <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'register-form__elements__input-text small-field'])->label(false) ?>
+                    <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'register-form__elements__input-select'])->label(false) ?>
+                </div>
+                <div class="register-form__elements__block-with-photo__photo-picker">
+                    <label class="input-file">
+                        <?= $form->field($model, 'photo')->fileInput(['id' => 'upload', 'onchange' => 'handleImageUploadRegistration()'])->label(false) ?>
+                        <span>Выберите файл</span>
+                    </label>
+                </div>
             </div>
-            <div class="register-form__elements__block-with-photo__photo-picker">
-                <label class="input-file">
-                    <?= $form->field($model, 'photo')->fileInput(['id' => 'upload', 'onchange' => 'handleImageUploadRegistration()'])->label(false) ?>
-                    <span>Выберите файл</span>
-                </label>
-            </div>
-        </div>
-        <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
-            'options' => ['class' => 'register-form__elements__input-date'],
-            'clientOptions' => [
-                'changeMonth' => true,
-                'changeYear' => true,
-                'yearRange' => '1980:2080',],
-            'language' => 'ru', // Укажите нужный язык
-            'dateFormat' => 'yyyy-MM-dd', // Формат даты
-        ])->label(false) ?>
-        <?= $form->field($model, 'email')->textInput(['placeholder' => 'E-mail', 'class' => 'register-form__elements__input-text'])->label(false) ?>
-        <?= $form->field($model, 'password_hash')->passwordInput(['placeholder' => 'Пароль', 'class' => 'register-form__elements__input-text'])->label(false) ?>
-        <?= $form->field($model, 'password_confirming')->passwordInput(['placeholder' => 'Подтверждение пароля', 'class' => 'register-form__elements__input-text big-input-text'])->label(false) ?>
-        <?= $form->field($model, 'location')->dropDownList($cities, [
+            <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
+                'options' => ['class' => 'register-form__elements__input-date'],
+                'clientOptions' => [
+                    'changeMonth' => true,
+                    'changeYear' => true,
+                    'yearRange' => '1980:2080',],
+                'language' => 'ru', // Укажите нужный язык
+                'dateFormat' => 'yyyy-MM-dd', // Формат даты
+            ])->label(false) ?>
+            <?= $form->field($model, 'email')->textInput(['placeholder' => 'E-mail', 'class' => 'register-form__elements__input-text'])->label(false) ?>
+            <?= $form->field($model, 'password_hash')->passwordInput(['placeholder' => 'Пароль', 'class' => 'register-form__elements__input-text'])->label(false) ?>
+            <?= $form->field($model, 'password_confirming')->passwordInput(['placeholder' => 'Подтверждение пароля', 'class' => 'register-form__elements__input-text big-input-text'])->label(false) ?>
+            <?= $form->field($model, 'location')->dropDownList($cities, [
                 'class' => 'register-form__elements__input-select big-select',
                 'options' => [
-                            '0' => ['disabled' => true, 'selected' => true],
+                    '0' => ['disabled' => true, 'selected' => true],
                 ],
 
-        ])->label(false) ?>
-        <?= Html::submitButton('Найти себе пару', ['class' => 'register-form__elements__button']) ?>
-        <?php ActiveForm::end(); ?>
+            ])->label(false) ?>
+            <?= Html::submitButton('Найти себе пару', ['class' => 'register-form__elements__button']) ?>
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
 </div>
