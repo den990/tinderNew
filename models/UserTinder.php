@@ -42,7 +42,7 @@ class UserTinder extends ActiveRecord implements IdentityInterface
                 'password_hash',
                 'match',
                 'pattern' => '/^(?=.*\d)(?=.*[A-Z]).{6,20}$/',
-                'message' => 'Пароль должен содержать хотя бы 1 цифру и 1 заглавную букву, и быть длиной от 6 до 20 символов',
+                'message' => "Пароль должен содержать хотя бы 1 цифру, букву, <br /> быть длиной от 6 до 20 символов",
                 'skipOnEmpty' => false
             ],
             ['password_confirming', 'compare', 'compareAttribute' => 'password_hash', 'message' => 'Пароли должны совпадать'],

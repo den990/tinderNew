@@ -27,7 +27,9 @@ $this->registerJs("
 <div class="register-block">
     <div class="register-form">
         <span class="register-form__title">Найдите свою вторую половинку</span>
-        <?php $form = ActiveForm::begin(['action' => ['registration/register'], 'options' => ['enctype' => 'multipart/form-data']] ); ?>
+        <?php $form = ActiveForm::begin(['action' => ['registration/register'], 'options' => ['enctype' => 'multipart/form-data'], 'fieldConfig' => [
+            'errorOptions' => ['class' => 'invalid-feedback', 'encode' => false],
+        ],] ); ?>
         <?= Html::hiddenInput(Yii::$app->request->csrfParam, Yii::$app->request->getCsrfToken()) ?>
 
         <div class="register-form__elements__block-with-photo">
