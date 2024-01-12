@@ -214,10 +214,6 @@ input::-webkit-calendar-picker-indicator {
     padding: 19px 32px 20px 27px;
     font: 600 24px/1.22 'Montserrat';
     color: white;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: rgba(26, 26, 24, 1) url("../images/icon_edit.svg") no-repeat 90% 50%;
 }
 
 .profile-editing__fields__text-fields__date
@@ -228,6 +224,7 @@ input::-webkit-calendar-picker-indicator {
     font: 600 24px/1.22 'Montserrat';
     color: white;
     background-color: rgba(26, 26, 24, 1);
+    margin-top: 5px;
 }
 
 .profile-editing__fields__text-fields__input-select__city
@@ -237,18 +234,29 @@ input::-webkit-calendar-picker-indicator {
     padding: 19px 442px 20px 27px;
     font: 600 24px/1.22 'Montserrat';
     color: white;
-    margin-top: 30px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: rgba(26, 26, 24, 1) url("../images/icon_edit.svg") no-repeat 98% 50%;
 }
 
 .big-text
 {
-    margin-top: 30px;
     max-width: 100%;
     padding: 92px 178px 93px 156px;
+}
+
+.profile-editing__fields__text-fields__text
+{
+    color: #9B9B9B;
+    font: 600 16px/1.22 'Montserrat';
+}
+
+.first-text
+{
+    padding-left: 15px;
+}
+
+.second-text
+{
+    padding-left: 35px;
+    padding-bottom: 5px;
 }
 
 @media screen and (max-width: 1600px)
@@ -284,19 +292,21 @@ input::-webkit-calendar-picker-indicator {
     {
         display: flex;
         flex-direction: row;
-        padding-top: 20px;
+        padding-top: 10px;
     }
     .profile-editing__fields__text-fields__input-text
     {
         font-size: 16px;
         padding: 5px 3px 5px 14px;
         max-width: 180px;
+        margin-top: 5px;
     }
     .profile-editing__fields__text-fields__input-select
     {
         font-size: 16px;
         padding: 5px 16px 5px 14px;
         background: rgba(26, 26, 24, 1);
+        margin-top: 5px;
     }
     .profile-editing__fields__text-fields__date
     {
@@ -309,12 +319,11 @@ input::-webkit-calendar-picker-indicator {
         max-width: 385px;
         font-size: 16px;
         padding: 5px 257px 5px 14px;
-        margin-top: 20px;
         background: rgba(26, 26, 24, 1);
+        margin-top: 5px;
     }
     .big-text
     {
-        margin-top: 20px;
         padding-right: 204px;
         max-width: 100%;
     }

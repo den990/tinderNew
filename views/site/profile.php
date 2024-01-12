@@ -28,31 +28,46 @@ $this->title = "Profile";
     <div class="profile-editing__fields">
         <div class="profile-editing__fields__text-fields">
             <div class="profile-editing__fields__text-fields__name-block">
-                <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Имя', 'class' => 'profile-editing__fields__text-fields__input-text'])->label(false) ?>
-                <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'profile-editing__fields__text-fields__input-text input-text_big field-padding'])->label(false) ?>
+                <div>
+                    <span class="profile-editing__fields__text-fields__text first-text">Имя</span>
+                    <?= $form->field($model, 'first_name')->textInput(['placeholder' => 'Имя', 'class' => 'profile-editing__fields__text-fields__input-text'])->label(false) ?>
+                </div>
+                <div>
+                    <span class="profile-editing__fields__text-fields__text second-text">Фамилия</span>
+                    <?= $form->field($model, 'last_name')->textInput(['placeholder' => 'Фамилия', 'class' => 'profile-editing__fields__text-fields__input-text input-text_big field-padding'])->label(false) ?>
+                </div>
             </div>
             <div class="profile-editing__fields_text-fields_additional-info">
-                <?= $form->field($model, 'gender')->dropDownList(['0' => 'Мужской', '1' => 'Женский'], ['class' => 'profile-editing__fields__text-fields__input-select'])->label(false) ?>
-                <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
-                    'options' => ['class' => 'profile-editing__fields__text-fields__date field-padding'],
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '1980:2080',],
-                    'language' => 'ru', // Укажите нужный язык
-                    'dateFormat' => 'yyyy-MM-dd', // Формат даты
-                ])->label(false) ?>
-
+                <div>
+                    <span class="profile-editing__fields__text-fields__text first-text">Пол</span>
+                    <?= $form->field($model, 'gender')->dropDownList(['0' => 'Мужской', '1' => 'Женский'], ['class' => 'profile-editing__fields__text-fields__input-select'])->label(false) ?>
+                </div>
+                <div>
+                    <span class="profile-editing__fields__text-fields__text second-text">День рождения</span>
+                    <?= $form->field($model, 'birthday')->widget(DatePicker::class, [
+                        'options' => ['class' => 'profile-editing__fields__text-fields__date field-padding'],
+                        'clientOptions' => [
+                            'changeMonth' => true,
+                            'changeYear' => true,
+                            'yearRange' => '1980:2080',],
+                        'language' => 'ru', // Укажите нужный язык
+                        'dateFormat' => 'yyyy-MM-dd', // Формат даты
+                    ])->label(false) ?>
+                </div>
             </div>
-
-            <?= $form->field($model, 'location')->dropDownList($cities, [
+            <div style="margin-top: 5px">
+                <span class="profile-editing__fields__text-fields__text first-text">Город</span>
+                <?= $form->field($model, 'location')->dropDownList($cities, [
                     'class' => 'profile-editing__fields__text-fields__input-select__city',
                     'options' => [
-                            '1' => ['disabled' => true, 'selected' => true],
-                        ],
-            ])->label(false) ?>
-
-            <?= $form->field($model, 'description')->textarea(['placeholder' => 'Дополнительная информация', 'class' => 'profile-editing__fields__text-fields__input-text big-text', 'rows' => '6'])->label(false) ?>
+                        '1' => ['disabled' => true, 'selected' => true],
+                    ],
+                ])->label(false) ?>
+            </div>
+            <div style="margin-top: 5px">
+                <span class="profile-editing__fields__text-fields__text first-text">Дополнительная информация</span>
+                <?= $form->field($model, 'description')->textarea(['placeholder' => 'Дополнительная информация', 'class' => 'profile-editing__fields__text-fields__input-text big-text', 'rows' => '6'])->label(false) ?>
+            </div>
         </div>
         <div class="profile-editing__fields__photo-button-block">
             <?php $photoId = $model->getPhotoId();
