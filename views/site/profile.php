@@ -89,6 +89,7 @@ $this->title = "Profile";
                     'onclick' => 'exit()',
                 ]) ?>
             </div>
+            <button class="profile-editing__fields__photo-button-block__change-password-button">Сменить пароль</button>
         </div>
     </div>
 
