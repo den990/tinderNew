@@ -324,4 +324,9 @@ class SiteController extends Controller
             ]);
         }
     }
+
+    public function actionChangePassword()
+    {
+        return $this->render('change-password');
+    }
 }
