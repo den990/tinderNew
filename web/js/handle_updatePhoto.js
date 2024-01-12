@@ -15,9 +15,7 @@ function handleImageUpload()
 
 function handleImageUploadRegistration()
 {
-
     var image = document.getElementById("upload").files[0];
-
     var reader = new FileReader();
 
     reader.onload = function(e) {
@@ -37,16 +35,24 @@ function handleImageUploadRegistration()
         img.alt = 'User Photo';
         img.width = '75';
         img.height = '75';
+        img.style.marginLeft = "2%"
 
         // Добавляем изображение в блок
-        block.appendChild(img);
+        block.prepend(img);
+
+        // Получаем имя файла из пути
+        var fileName = document.getElementById('upload').value.split('\\').pop();
+
+        // Обрезаем имя файла, если оно слишком длинное
+        var maxFileNameLength = 15;
+        if (fileName.length > maxFileNameLength) {
+            fileName = fileName.substring(0, maxFileNameLength) + '...';
+        }
+
+        // Обновляем текст в span
+        document.querySelector('.input-file span').innerText = fileName;
     };
 
     reader.readAsDataURL(image);
-
 }
 
-$('.input-file input[type=file]').on('change', function(){
-    let file = this.files[0];
-    $(this).next().html(file.name);
-});

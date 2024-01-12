@@ -7,9 +7,9 @@
 use yii\bootstrap5\Html;
 use yii\jui\DatePicker;
 use yii\bootstrap5\ActiveForm;
-use app\assets\LoginScreenAsset;
+use app\assets\ChangePasswordScreenAsset;
 
-LoginScreenAsset::register($this);
+ChangePasswordScreenAsset::register($this);
 
 $this->title = 'Change Password';
 ?>

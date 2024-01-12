@@ -34,10 +34,18 @@ class UserTinder extends ActiveRecord implements IdentityInterface
     {
         return [
             ['photo', 'required', 'message' => 'Загрузите аватар'],
-            [['first_name', 'last_name', 'gender', 'birthday', 'email', 'password_hash', 'location'], 'required'],
+            [['first_name', 'last_name', 'gender', 'birthday', 'email', 'password_hash', 'location'], 'required', 'message' => 'Поле пустое'],
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => self::className(), 'message' => 'This email address has already been taken.'],
             ['location', 'compare', 'compareValue' => '0', 'operator' => '!=', 'message' => 'Выберите город'],
+            [
+                'password_hash',
+                'match',
+                'pattern' => '/^(?=.*\d)(?=.*[A-Z]).{6,20}$/',
+                'message' => 'Пароль должен содержать хотя бы 1 цифру и 1 заглавную букву, и быть длиной от 6 до 20 символов',
+                'skipOnEmpty' => false
+            ],
+            ['password_confirming', 'compare', 'compareAttribute' => 'password_hash', 'message' => 'Пароли должны совпадать'],
         ];
     }
 

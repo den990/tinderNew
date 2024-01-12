@@ -13,4 +13,5 @@ class ChangePasswordScreenAsset
 
     public $js = [
     ];
+
 }

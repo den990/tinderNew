@@ -74,7 +74,12 @@ $this->title = "Profile";
             $modelPhoto = Photo::find()->where(['id_photo' => $photoId])->one();
             $photoPath = $modelPhoto->getImageUrl();?>
             <?= Html::img($photoPath, ['class' => 'user-photo', 'id' => 'display-image', 'alt' => 'User Photo', 'width' => '200px', 'height' => '200px']) ?>
-            <?= $form->field($model, 'photo')->fileInput(['id' => 'upload', 'onchange' => 'handleImageUpload()'])->label(false) ?>
+            <div class="profile-editing__block-with-photo__photo-picker">
+                <label class="input-file">
+                    <?= $form->field($model, 'photo')->fileInput(['id' => 'upload', 'onchange' => 'handleImageUpload()'])->label(false) ?>
+                    <span>Выберите файл</span>
+                </label>
+            </div>
             <div>
             <?= Html::submitButton('Сохранить', ['class' => 'profile-editing__fields__photo-button-block__submit-button']) ?>
             </div>
