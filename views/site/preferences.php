@@ -32,8 +32,9 @@ $this->title = "Preferences";
             </div>
             <div class="preferences-block__main__sex-age__inputs">
                 <?= $form->field($model, 'gender')->dropDownList(['0' => 'Мужской', '1' => 'Женский'], ['class' => 'input-style preferences-block__main__sex-age__inputs__sex'])->label(false) ?>
-                <?= $form->field($model, 'age_start')->textInput(['placeholder' => 'От', 'class' => 'input-style preferences-block__main__sex-age__inputs__age-min'])->label(false) ?>
-                <?= $form->field($model, 'age_end')->textInput(['placeholder' => 'До', 'class' => 'input-style preferences-block__main__sex-age__inputs__age-max'])->label(false) ?>
+                <?= $form->field($model, 'age_start')->textInput(['type' => 'number', 'placeholder' => 'От', 'class' => 'input-style preferences-block__main__sex-age__inputs__age-min', 'controls' => false])->label(false) ?>
+                <?= $form->field($model, 'age_end')->textInput(['type' => 'number', 'placeholder' => 'До', 'class' => 'input-style preferences-block__main__sex-age__inputs__age-max', 'controls' => false])->label(false) ?>
+
             </div>
         </div>
         <div class="preferences-block__main__city">

@@ -37,7 +37,10 @@ $this->registerJs("
                 <?= $form->field($model, 'gender')->dropDownList(['Мужской' => 'Мужской', 'Женский' => 'Женский'], ['class' => 'register-form__elements__input-select'])->label(false) ?>
             </div>
             <div class="register-form__elements__block-with-photo__photo-picker">
-                <?= $form->field($model, 'photo')->fileInput()->label(false) ?>
+                <label class="input-file">
+                    <?= $form->field($model, 'photo')->fileInput(['id' => 'upload', 'onchange' => 'handleImageUploadRegistration()'])->label(false) ?>
+                    <span>Выберите файл</span>
+                </label>
             </div>
         </div>
         <?= $form->field($model, 'birthday')->widget(DatePicker::class, [

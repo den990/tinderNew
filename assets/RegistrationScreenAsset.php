@@ -12,4 +12,7 @@ class RegistrationScreenAsset extends AssetBundle
     public $css = [
         'css/registration_screen.css',
     ];
+    public $js = [
+        'js/handle_updatePhoto.js',
+    ];
 }

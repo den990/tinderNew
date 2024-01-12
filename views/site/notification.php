@@ -47,8 +47,13 @@ $this->title = 'Notification';
                         <path d="M0 1H3000" stroke="#272C28" stroke-width="2"/>
                     </svg>
                 <?php endforeach; ?>
-
             </div>
+        </div>
+        <div class="block__notification__footer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="4" viewBox="0 0 100% 4" fill="none">
+                <path d="M0 2H3000" stroke="#272C28" stroke-width="3"/>
+            </svg>
+            <span class="block__notification__footer-text">Показаны последние новости за 3 дня</span>
         </div>
     </div>
 </div>

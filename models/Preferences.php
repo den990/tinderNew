@@ -28,9 +28,9 @@ class Preferences extends ActiveRecord implements IdentityInterface
             ['gender', 'required'],
             ['age_start', 'required'],
             ['age_end', 'required'],
-            ['age_start', 'integer', 'min' => 1, 'message' => 'Минимальный возраст должен быть больше 0'],
-            ['age_end', 'integer', 'min' => 1, 'message' => 'Максимальный возраст должен быть больше 0'],
-            ['age_end', 'compare', 'compareAttribute' => 'age_start', 'operator' => '>=', 'message' => 'Максимальный возраст должен быть больше или равен минимальному возрасту'],
+            ['age_start', 'integer', 'min' => 0, 'message' => 'Минимальный возраст должен быть больше 0'],
+            ['age_end', 'integer', 'min' => 0, 'message' => 'Максимальный возраст должен быть больше 0'],
+            ['age_end', 'compare', 'compareAttribute' => 'age_start', 'operator' => '>=', 'type' => 'number', 'message' => 'Максимальный возраст должен быть больше или равен минимальному возрасту'],
         ];
     }
 

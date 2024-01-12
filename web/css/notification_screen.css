@@ -81,3 +81,24 @@
     font-weight: 400;
     line-height: normal;
 }
+
+.block__notification__footer
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: column;
+}
+
+.block__notification__footer-text
+{
+    margin-top: 1%;
+    margin-bottom: 2%;
+    color: #9B9B9B;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
