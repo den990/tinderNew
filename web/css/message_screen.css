@@ -110,11 +110,6 @@
     color: rgba(130, 130, 130, 1);
 }
 
-.block__message-window__chat
-{
-
-}
-
 .block__message-window__chat__user-info
 {
     display: flex;
@@ -127,6 +122,7 @@
     color: white;
     padding-left: 30px;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .block__message-window__chat__user-info__date

@@ -79,7 +79,6 @@ $this->title = 'Message';
             <div class="block__message-window__chat" style="display: none;">
                 <div class="block__message-window__chat__user-info">
                     <span class="block__message-window__chat__user-info__name">Даниил Колдырев</span>
-                    <span class="block__message-window__chat__user-info__date">Был(а) 4 часа назад</span>
                 </div>
                 <div class="block__message-window__chat__messages" id="chat">
 
