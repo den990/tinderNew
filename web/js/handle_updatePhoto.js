@@ -35,7 +35,7 @@ function handleImageUploadRegistration()
         img.alt = 'User Photo';
         img.width = '75';
         img.height = '75';
-        img.style.marginLeft = "2%"
+        img.style.marginLeft = "20%"
 
         // Добавляем изображение в блок
         block.prepend(img);
