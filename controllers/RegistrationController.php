@@ -25,6 +25,7 @@ class RegistrationController extends Controller
             if ($modelTinderUser->validate()) {
                 $password = $modelTinderUser->password_hash;
                 $modelTinderUser->setPassword($password);
+                $modelTinderUser->password_confirming = $modelTinderUser->password_hash;
                     $photo = $modelTinderUser->photo;
                     $path = '@app/web/photoUsers';
 
@@ -37,7 +38,6 @@ class RegistrationController extends Controller
                             $modelTinderUser->photo = $modelPhoto->getId();
                         }
                     }
-
                     if ($modelTinderUser->save()) {
                         Yii::$app->session->setFlash('success', 'Регистрация успешна');
                         $modelPhoto->id_user = $modelTinderUser->getId();
@@ -47,8 +47,12 @@ class RegistrationController extends Controller
                         $modelPhoto->save();
                         return $this->redirect(['site/index']);
                     } else {
+
+                            Yii::error("Error saving Match model: " . print_r($modelTinderUser->errors, true), 'app\controllers\RegistrationController');
                         Yii::$app->session->setFlash('error', 'Произошла ошибка при сохранении данных.');
                         $cities = array_keys(Cities::$codeToValue);
+                        $modelTinderUser->password_hash =$password;
+                        $modelTinderUser->password_confirming = $password;
                         return $this->render('@app/views/site/registration', [
 
                             'model' => $modelTinderUser,
