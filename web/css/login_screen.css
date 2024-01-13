@@ -215,13 +215,6 @@ a {
     padding-left: 80px;
 }
 
-.invalid-feedback
-{
-    color: red;
-    padding-top: 5px;
-    font: 500 16px/1.22 'Montserrat';
-}
-
 @media screen and (max-width: 1600px)
 {
     .login-block

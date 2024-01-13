@@ -218,3 +218,10 @@ section
     }
 }
 
+.invalid-feedback
+{
+    color: red;
+    padding-top: 5px;
+    font: 500 16px/1.22 'Montserrat';
+}
+

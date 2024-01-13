@@ -181,7 +181,7 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (Yii::$app->user->isGuest) {
-            $model = new UserTinder();
+            $model = new LoginForm();
             return $this->render('login', ['model' => $model]);
         }
         else
@@ -327,6 +327,6 @@ class SiteController extends Controller
 
     public function actionChangePassword()
     {
-        return $this->render('change-password');
+        return $this->render('change-password', ['model' => null]);
     }
 }

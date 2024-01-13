@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ChangePasswordForm;
 use app\models\enums\Cities;
 use yii\base\Model;
 use app\models\UserTinderUpdate;
@@ -74,6 +75,36 @@ class UpdateController extends Controller
             } else {
                 var_dump($modelTinderUser->getErrors());
                 throw new NotSupportedException('Incorrect data');
+            }
+        }
+    }
+
+    public function actionChangePassword()
+    {
+        $modelChangePassword = new ChangePasswordForm();
+        $user = UserTinder::findOne(['id_user' => Yii::$app->user->getId()]);
+        if (Yii::$app->request->isPost) {
+            $postData = Yii::$app->request->post();
+            $modelChangePassword->load($postData);
+            if($modelChangePassword->validate())
+            {
+                $user->setPassword($modelChangePassword->new_password);
+                if (!$user->save()) {
+                    Yii::error("Error saving Match model: " . print_r($user->errors, true), 'app\controllers\UpdateController');
+                }
+
+                $cities = array_merge(['1'], array_keys(Cities::$codeToValue));
+                unset($cities['0']);
+                return $this->render('@app/views/site/profile', [
+                    'model' => $user,
+                    'cities' => $cities
+                ]);
+            }
+            else
+            {
+                return $this->render('@app/views/site/change-password', [
+                    'model' => $modelChangePassword,
+                ]);
             }
         }
     }
