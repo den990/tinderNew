@@ -23,7 +23,6 @@
         <span>Reset Password Screen</span>
         <img src="https://i.imgur.com/2nvmb1W.jpeg" >
         
-    <br>
 </p>
 
 Finder Project Template is a skeleton [Yii 2](https://www.yiiframework.com/) application best for
